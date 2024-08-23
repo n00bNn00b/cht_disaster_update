@@ -23,7 +23,7 @@ const Modal = () => {
           <p>
             এই প্লাটফর্মটি এখনও বেটা ভার্সনে চলছে। এই প্লাটফর্মটি
             <b>
-              <i> Indigenous Artists' Unity</i>
+              <i> Indigenous Artists' Unity </i>
             </b>
             এর একটি ক্ষুদ্র প্রয়াস যা প্রতিনিয়ত চলমান থাকবে।
           </p>
