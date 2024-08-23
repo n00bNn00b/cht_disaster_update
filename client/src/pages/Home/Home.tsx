@@ -13,10 +13,27 @@ import {
     TableHeader,
     TableRow,
   } from "@/components/ui/table";
+import { Services } from "@/types/types";
+import axios from "axios";
+import { useEffect, useState } from "react";
   
-  
-
 const Home = () => {
+  const [services, setServices] = useState<Services[]>([]);
+  const url = import.meta.env.VITE_API_URL;
+  useEffect(()=> {
+    const fetchServices = async () => {
+      try {
+        const response = await axios.get<Services[]>(
+          `${url}/services`
+        );
+        setServices(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchServices();
+  }, [url]);
   return (
     <>
       <Card className="bg-white/80">
@@ -28,23 +45,27 @@ const Home = () => {
             <Table>
                 <TableHeader>
                     <TableRow>
-                    <TableHead className="text-Blue-200">Team Name</TableHead>
-                    <TableHead className="text-Blue-200">Team Status</TableHead>
-                    <TableHead className="text-Blue-200">Working Areas</TableHead>
-                    <TableHead className="text-Blue-200">Areas Done</TableHead>
-                    <TableHead className="text-Blue-200">Contact No.</TableHead>
-                    <TableHead className="text-Blue-200">Admin Status</TableHead>
+                    <TableHead className="text-Green-200">Team Name</TableHead>
+                    <TableHead className="text-Green-200">Status</TableHead>
+                    <TableHead className="text-Green-200">Working Area</TableHead>
+                    <TableHead className="text-Green-200">Provided Services</TableHead>
+                    <TableHead className="text-Green-200">Contact No.</TableHead>
+                    <TableHead className="text-Green-200">Date</TableHead>
+                    <TableHead className="text-Green-200">Admin Status</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    <TableRow>
-                    <TableCell className="text-Blue-200">Unmesh</TableCell>
-                    <TableCell className="text-Blue-200">Working</TableCell>
-                    <TableCell className="text-Blue-200">Dhoniram Para(Matiranga)</TableCell>
-                    <TableCell className="text-Blue-200">Dhoniram Para(Matiranga), Beltoli Para(Kharachari)</TableCell>
-                    <TableCell className="text-Blue-200">01556331709</TableCell>
-                    <TableCell className="text-Blue-200">Verified by admin</TableCell>
-                    </TableRow>
+                    {services.map(service => (
+                      <TableRow key={service._id}>
+                        <TableCell className="text-Blue-200">{service.teamName}</TableCell>
+                        <TableCell className="text-Blue-200">{service.status}</TableCell>
+                        <TableCell className="text-Blue-200">{service.workingArea}</TableCell>
+                        <TableCell className="text-Blue-200">{service.providedService}</TableCell>
+                        <TableCell className="text-Blue-200">{service.contact}</TableCell>
+                        <TableCell className="text-Blue-200">{service.date}</TableCell>
+                        <TableCell className="text-Blue-200">{service.isVerifiedByAdmin? "Verified by IAU": "Still not verified"}</TableCell>
+                      </TableRow>
+                    ))}
                 </TableBody>
             </Table>
     </CardContent>

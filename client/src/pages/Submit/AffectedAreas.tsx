@@ -38,7 +38,7 @@ const AffectedAreas = () => {
     
   return (
     <>
-      <Card className="bg-white/50">
+      <Card className="bg-white/80">
         <CardHeader>
             <CardTitle className="text-xl font-bold font-special text-Green-100">Submit Affected Area List</CardTitle>
         </CardHeader>
