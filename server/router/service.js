@@ -49,7 +49,15 @@ router.get("/services", async (req, res) => {
 //update
 router.put("/services/:name", async (req, res) => {
   const name = req.params.teamName;
-  const { teamName, workingArea, contact, providedService, status } = req.body;
+  const {
+    teamName,
+    workingArea,
+    contact,
+    providedService,
+    date,
+    status,
+    isVerifiedByAdmin,
+  } = req.body;
   try {
     const service = await Services.findOne({ name });
     if (!service) {
@@ -62,6 +70,9 @@ router.put("/services/:name", async (req, res) => {
       service.contact = contact;
       service.providedService = providedService;
       service.status = status;
+      service.date = date;
+      service.isVerifiedByAdmin = isVerifiedByAdmin;
+
       await service.save();
       res.status(200).json({ message: "Service updated successfully!" });
     }
