@@ -23,7 +23,7 @@ const Topbar = () => {
                 <Menu/>
               </SheetTrigger>
               <SheetContent className="w-[220px]">
-                <SheetHeader className="flex justify-end">
+                <SheetHeader>
                   <div className="flex flex-col items-start gap-2">
                       <NavLink to={'/'} className={({isActive}) => isActive? "underline text-Green-100": "hover:underline text-Green-100"}>Home</NavLink>
                       <NavLink to={'/submit'} className={({isActive}) => isActive? "underline text-Green-100": "hover:underline text-Green-100"}>Submit</NavLink>
