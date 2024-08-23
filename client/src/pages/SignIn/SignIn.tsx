@@ -13,6 +13,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { toast } from "@/components/ui/use-toast";
+import { useNavigate } from "react-router-dom";
 
 const formSchema = z.object({
   email: z.string().min(3, {
@@ -23,6 +24,7 @@ const formSchema = z.object({
 
 const SignIn = () => {
   const url = import.meta.env.VITE_API_URL;
+  const navigate = useNavigate();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -38,9 +40,11 @@ const SignIn = () => {
         .then((res) => {
           // console.log(res);
           if (res.status === 200) {
+            console.log(res.data);
             toast({
               title: res.data.message,
             });
+            navigate("/");
           }
         })
         .catch((err) => {
