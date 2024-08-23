@@ -16,8 +16,6 @@ router.post("/services/add", async (req, res) => {
   } = req.body;
 
   try {
-    // Check if the user with the given userID exists
-
     const newService = new Services({
       teamName,
       workingArea,
@@ -28,7 +26,7 @@ router.post("/services/add", async (req, res) => {
       isVerifiedByAdmin,
     });
 
-    // Save the new booking to the database
+    // Save the new service to the database
     await newService.save();
 
     res.status(201).json({ message: "Team Service added Successfully!" });
