@@ -1,15 +1,12 @@
 const express = require("express");
-const mongoose = require("mongoose");
-const cookieParser = require("cookie-parser");
-const app = express();
 const cors = require("cors");
-const connection = require("./db/connection");
-
+const app = express();
 const port = 5000 || process.env.PORT;
 
 app.use(express.json());
 app.use(cors());
-app.use(cookieParser());
+
+app.use(require("./router/auth"));
 
 app.get("/", (req, res) => {
   res.send("Arc-ng Server is Running 😎!");
