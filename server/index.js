@@ -8,6 +8,7 @@ app.use(cors());
 
 app.use(require("./router/auth"));
 app.use(require("./router/service"));
+app.use(require("./router/areas"));
 
 app.get("/", (req, res) => {
   res.send("Arc-ng Server is Running 😎!");
