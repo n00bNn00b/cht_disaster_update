@@ -1,6 +1,7 @@
 import Topbar from "@/components/ui/apps/topbar/Topbar";
 import { Outlet } from "react-router-dom";
 import backgroundImage from "../images/bg-image.jpeg"
+import { Toaster } from "@/components/ui/toaster";
 
 const Layout = () => {
   return (
@@ -12,6 +13,7 @@ const Layout = () => {
             <Outlet/>
         </div>
     </div>
+    <Toaster/>
     </div>
     </>
   )
