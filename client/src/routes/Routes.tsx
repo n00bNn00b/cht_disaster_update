@@ -6,36 +6,35 @@ import Submit from "@/pages/Submit/Submit";
 import TeamProgress from "@/pages/TeamProgress/TeamProgress";
 import { createBrowserRouter } from "react-router-dom";
 
-
 const routes = createBrowserRouter([
-    {
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      {
         path: "/",
-        element: <Layout/>,
+        element: <Home />,
+      },
+      {
+        path: "/admin",
+        element: <SignIn />,
+      },
+      {
+        path: "/submit",
+        element: <Submit />,
         children: [
-            {
-                path: "/home",
-                element: <Home/>
-            },
-            {
-                path: "/admin",
-                element: <SignIn/>
-            },
-            {
-                path: "/submit",
-                element: <Submit/>,
-                children: [
-                    {
-                        path: "affected-areas",
-                        element: <AffectedAreas/>
-                    },
-                    {
-                        path: "team-progress",
-                        element: <TeamProgress/>
-                    }
-                ]
-            }
-        ]
-    }
+          {
+            path: "affected-areas",
+            element: <AffectedAreas />,
+          },
+          {
+            path: "team-progress",
+            element: <TeamProgress />,
+          },
+        ],
+      },
+    ],
+  },
 ]);
 
 export default routes;
