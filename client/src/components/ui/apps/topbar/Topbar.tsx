@@ -3,9 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
   SheetHeader,
-  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
 
@@ -25,12 +23,12 @@ const Topbar = () => {
                 <Menu/>
               </SheetTrigger>
               <SheetContent>
-                <SheetHeader>
-                  <SheetTitle>Are you absolutely sure?</SheetTitle>
-                  <SheetDescription>
-                    This action cannot be undone. This will permanently delete your account
-                    and remove your data from our servers.
-                  </SheetDescription>
+                <SheetHeader className="flex justify-end">
+                  <div className="flex flex-col items-start gap-4">
+                      <NavLink to={'/'} className={({isActive}) => isActive? "underline": "hover:underline"}>Home</NavLink>
+                      <NavLink to={'/submit'} className={({isActive}) => isActive? "underline": "hover:underline"}>Submit</NavLink>
+                      <NavLink to={'/about-us'} className={({isActive}) => isActive? "underline": "hover:underline"}>About Us</NavLink>
+                  </div>
                 </SheetHeader>
               </SheetContent>
             </Sheet>
