@@ -22,12 +22,12 @@ const Topbar = () => {
               <SheetTrigger className="md:hidden">
                 <Menu/>
               </SheetTrigger>
-              <SheetContent>
-                <SheetHeader className="flex justify-end">
-                  <div className="flex flex-col items-start gap-4">
-                      <NavLink to={'/'} className={({isActive}) => isActive? "underline": "hover:underline"}>Home</NavLink>
-                      <NavLink to={'/submit'} className={({isActive}) => isActive? "underline": "hover:underline"}>Submit</NavLink>
-                      <NavLink to={'/about-us'} className={({isActive}) => isActive? "underline": "hover:underline"}>About Us</NavLink>
+              <SheetContent className="w-[200px]">
+                <SheetHeader>
+                  <div className="flex flex-col items-start gap-2">
+                      <NavLink to={'/'} className={({isActive}) => isActive? "underline text-Green-100": "hover:underline text-Green-100"}>Home</NavLink>
+                      <NavLink to={'/submit'} className={({isActive}) => isActive? "underline text-Green-100": "hover:underline text-Green-100"}>Submit</NavLink>
+                      <NavLink to={'/about-us'} className={({isActive}) => isActive? "underline text-Green-100": "hover:underline text-Green-100"}>About Us</NavLink>
                   </div>
                 </SheetHeader>
               </SheetContent>
