@@ -18,8 +18,8 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        special: ["DM Serif Display", "Bebas Neue", "sans-serif"],
-        poppins: ["Poppins", "sans-serif"]
+        special: ["Merriweather", "sans-serif"],
+        poppins: ["Work Sans", "sans-serif"]
       },
       colors: {
         border: "hsl(var(--border))",
