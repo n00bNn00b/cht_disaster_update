@@ -1,129 +1,147 @@
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
-    Card,
-    CardContent,
-    CardHeader,
-    CardTitle,
-  } from "@/components/ui/card";
-import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-    } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { z } from "zod"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useToast } from "@/components/ui/use-toast";
 
 const formSchema = z.object({
   victimName: z.string().min(3, {
     message: "name must be at least 3 characters.",
-    }),
-    familyMember: z.number().gte(1).positive(),
-    contact: z.string(),
-    address: z.string().min(3, {
-      message: "address must be at least 3 characters.",
   }),
-  date: z.date()
-    
-  })
+  familyMember: z.coerce.number().int().gte(0).positive(),
+  contact: z.string(),
+  address: z.string().min(3, {
+    message: "address must be at least 3 characters.",
+  }),
+  date: z.date(),
+});
 
 const VictimFamilyForm = () => {
-    const {toast} = useToast();
-    const url = import.meta.env.VITE_API_URL;
+  const { toast } = useToast();
+  const url = import.meta.env.VITE_API_URL;
 
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
-        defaultValues: {
-            victimName: "",
-            contact: "",
-            address: "",
-            date: new Date()
-            
-        },
-      });
-      
-    const onSubmit = async (values: z.infer<typeof formSchema>) => {
-      await axios.post(`${url}/victims/add`, values).then((res) => {
-        if(res.status === 201) {
-          toast({
-            title: res.data.message
-          })
-        }
-      })
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      victimName: "",
+      contact: "",
+      address: "",
+      date: new Date(),
+    },
+  });
+
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    await axios.post(`${url}/victims/add`, values).then((res) => {
+      if (res.status === 201) {
+        toast({
+          title: res.data.message,
+        });
       }
+    });
+  };
   return (
     <>
       <Card className="bg-white/80">
         <CardHeader>
-            <CardTitle className="text-xl font-bold font-special text-Green-100">ভিক্টিমের তালিকা হালনাগাদ</CardTitle>
+          <CardTitle className="text-xl font-bold font-special text-Green-100">
+            ভিক্টিমের তালিকা হালনাগাদ
+          </CardTitle>
         </CardHeader>
         <CardContent>
-        <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            <FormField
-            control={form.control}
-            name="victimName"
-            render={({ field }) => (
-                <FormItem>
-                    <FormLabel className="text-Green-100">ভিক্টিমের নাম</FormLabel>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+              <FormField
+                control={form.control}
+                name="victimName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-Green-100">
+                      ভিক্টিমের নাম
+                    </FormLabel>
                     <FormControl>
-                        <Input {...field} className="bg-transparent border-black"/>
+                      <Input
+                        {...field}
+                        className="bg-transparent border-black"
+                      />
                     </FormControl>
                     <FormMessage />
-                </FormItem>
-            )}
-            />
-            <FormField
-            control={form.control}
-            name="familyMember"
-            render={({ field }) => (
-                <FormItem>
-                    <FormLabel className="text-Green-100">পরিবারের সদস্য সংখ্যা</FormLabel>
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="familyMember"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-Green-100">
+                      পরিবারের সদস্য সংখ্যা
+                    </FormLabel>
                     <FormControl>
-                        <Input {...field} className="bg-transparent border-black"/>
+                      <Input
+                        {...field}
+                        className="bg-transparent border-black"
+                      />
                     </FormControl>
                     <FormMessage />
-                </FormItem>
-            )}
-            />
-            <FormField
-            control={form.control}
-            name="contact"
-            render={({ field }) => (
-                <FormItem>
-                    <FormLabel className="text-Green-100">যোগাযোগের নম্বরঃ</FormLabel>
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="contact"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-Green-100">
+                      যোগাযোগের নম্বরঃ
+                    </FormLabel>
                     <FormControl>
-                        <Input {...field} className="bg-transparent border-black"/>
+                      <Input
+                        {...field}
+                        className="bg-transparent border-black"
+                      />
                     </FormControl>
                     <FormMessage />
-                </FormItem>
-            )}
-            />
-            <FormField
-            control={form.control}
-            name="address"
-            render={({ field }) => (
-                <FormItem>
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="address"
+                render={({ field }) => (
+                  <FormItem>
                     <FormLabel className="text-Green-100">ঠিকানা</FormLabel>
                     <FormControl>
-                        <Input {...field} className="bg-transparent border-black"/>
+                      <Input
+                        {...field}
+                        className="bg-transparent border-black"
+                      />
                     </FormControl>
                     <FormMessage />
-                </FormItem>
-            )}
-            />
-           <button className="bg-Green-100 w-full h-8 text-white rounded-md hover:bg-Green-100/80" type="submit">Submit</button>
-        </form>
-        </Form>
+                  </FormItem>
+                )}
+              />
+              <button
+                className="bg-Green-100 w-full h-8 text-white rounded-md hover:bg-Green-100/80"
+                type="submit"
+              >
+                Submit
+              </button>
+            </form>
+          </Form>
         </CardContent>
       </Card>
     </>
-  )
-}
+  );
+};
 
-export default VictimFamilyForm
+export default VictimFamilyForm;
