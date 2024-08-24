@@ -41,10 +41,8 @@ const AdminDashboard = () => {
     const {toast} = useToast();
     const url = import.meta.env.VITE_API_URL;
     const date = new Date();
-    
 
-    useEffect(() => {
-        const fetchServices = async () => {
+    const fetchServices = async () => {
         try {
             const response = await axios.get<Services[]>(`${url}/services`);
             setServices(response.data);
@@ -53,9 +51,11 @@ const AdminDashboard = () => {
             console.log(error);
         }
         };
+    
 
+    useEffect(() => {
         fetchServices();
-    }, [url]);
+    });
 
     const convertDate = (isoDateString: string) => {
         const date = new Date(isoDateString);
@@ -101,7 +101,7 @@ const AdminDashboard = () => {
         }));
       };
 
-    const handleVerify = async (name: string) => {
+    const handleVerify = async (id: string) => {
         const data = {
             teamName: formData.teamName,
             workingArea: formData.workingArea,
@@ -111,18 +111,22 @@ const AdminDashboard = () => {
             isVerifiedByAdmin: true,
             date: date
         }
+        await axios.put(`${url}/services/${id}`, data)
+        .then(res => {
+            fetchServices();
+            console.log(res)
+            if(res.status === 200) {
+                toast({
+                    title: res.data.message
+                })
+            }
+        })
+        .catch(error => console.log(error));
+        setClickedUpdate('')
 
-        try {
-            await axios.put(`${url}/services/${name}`, data);
-            toast({
-              title: "Record saved to database"
-            })
-          } catch (error) {
-            console.error('Error:', error);
-          }
-        setClickedUpdate("");
         
-    };
+     
+};
 
   return (
     <>
@@ -203,7 +207,7 @@ const AdminDashboard = () => {
                   </TableCell>
                 {clickedUpdate === service._id? (
                     <TableCell className="text-Blue-200 flex gap-1">
-                    <button onClick={() => handleVerify(service.teamName)} className="px-2 py-1 bg-Green-100 rounded-md text-white">Verify</button>
+                    <button onClick={() => handleVerify(service._id)} className="px-2 py-1 bg-Green-100 rounded-md text-white">Verify</button>
                     <button onClick={handleCancelClickUpdate} className="px-2 py-1 bg-red-700 rounded-md text-white">Cancel</button>
                   </TableCell>
                   ): (
