@@ -56,6 +56,16 @@ const Topbar = () => {
                   >
                     দুর্গত এলাকাসমূহ
                   </NavLink>
+                  <NavLink
+                    to={"/victim-family-list"}
+                    className={({ isActive }) =>
+                      isActive
+                        ? "underline text-Green-100"
+                        : "hover:underline text-Green-100"
+                    }
+                  >
+                    ভিক্টিমের তালিকা
+                  </NavLink>
                 </div>
               </SheetHeader>
             </SheetContent>
@@ -85,6 +95,14 @@ const Topbar = () => {
               }
             >
               দুর্গত এলাকাসমূহ
+            </NavLink>
+            <NavLink
+              to={"/victim-family-list"}
+              className={({ isActive }) =>
+                isActive ? "underline" : "hover:underline"
+              }
+            >
+              ভিক্টিমের তালিকা
             </NavLink>
           </div>
 

@@ -24,6 +24,16 @@ const Submit = () => {
         >
           দুর্গত এলাকার নাম হালনাগাদ
         </NavLink>
+        <NavLink
+          to={"/submit/victim-family-list"}
+          className={({ isActive }) =>
+            isActive
+              ? "underline text-white font-special font-bold"
+              : "text-white font-special font-bold hover:underline"
+          }
+        >
+          ভিক্টিমের তালিকা হালনাগাদ
+        </NavLink>
 
       </div>
       <div className="mt-4">

@@ -20,13 +20,15 @@ import axios from "axios";
 import { useToast } from "@/components/ui/use-toast";
 
 const formSchema = z.object({
-    name: z.string().min(3, {
+  victimName: z.string().min(3, {
     message: "name must be at least 3 characters.",
     }),
-    familyMembers: z.number(),
-    damageHappened: z.string().min(3, {
-        message: "damageHappened must be at least 3 characters.",
-    }),
+    familyMember: z.number().gte(1).positive(),
+    contact: z.string(),
+    address: z.string().min(3, {
+      message: "address must be at least 3 characters.",
+  }),
+  date: z.date()
     
   })
 
@@ -37,38 +39,38 @@ const VictimFamilyForm = () => {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            name: "",
-            familyMembers: 1,
-            damageHappened: "",
+            victimName: "",
+            contact: "",
+            address: "",
+            date: new Date()
             
         },
       });
       
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
-        try {
-            await axios.post(`${url}/services/add`, values);
-            toast({
-              title: "Record saved to database"
-            })
-          } catch (error) {
-            console.error('Error:', error);
-          }
+      await axios.post(`${url}/victims/add`, values).then((res) => {
+        if(res.status === 201) {
+          toast({
+            title: res.data.message
+          })
+        }
+      })
       }
   return (
     <>
       <Card className="bg-white/80">
         <CardHeader>
-            <CardTitle className="text-xl font-bold font-special text-Green-100">Victim Family Information</CardTitle>
+            <CardTitle className="text-xl font-bold font-special text-Green-100">ভিক্টিমের তালিকা হালনাগাদ</CardTitle>
         </CardHeader>
         <CardContent>
         <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <FormField
             control={form.control}
-            name="name"
+            name="victimName"
             render={({ field }) => (
                 <FormItem>
-                    <FormLabel className="text-Green-100">Name(Family Head)</FormLabel>
+                    <FormLabel className="text-Green-100">ভিক্টিমের নাম</FormLabel>
                     <FormControl>
                         <Input {...field} className="bg-transparent border-black"/>
                     </FormControl>
@@ -78,12 +80,12 @@ const VictimFamilyForm = () => {
             />
             <FormField
             control={form.control}
-            name="familyMembers"
+            name="familyMember"
             render={({ field }) => (
                 <FormItem>
-                    <FormLabel className="text-Green-100">Family Members</FormLabel>
+                    <FormLabel className="text-Green-100">পরিবারের সদস্য সংখ্যা</FormLabel>
                     <FormControl>
-                        <Input type="number" {...field} className="bg-transparent border-black"/>
+                        <Input {...field} className="bg-transparent border-black"/>
                     </FormControl>
                     <FormMessage />
                 </FormItem>
@@ -91,10 +93,23 @@ const VictimFamilyForm = () => {
             />
             <FormField
             control={form.control}
-            name="damageHappened"
+            name="contact"
             render={({ field }) => (
                 <FormItem>
-                    <FormLabel className="text-Green-100">Damage Happened</FormLabel>
+                    <FormLabel className="text-Green-100">যোগাযোগের নম্বরঃ</FormLabel>
+                    <FormControl>
+                        <Input {...field} className="bg-transparent border-black"/>
+                    </FormControl>
+                    <FormMessage />
+                </FormItem>
+            )}
+            />
+            <FormField
+            control={form.control}
+            name="address"
+            render={({ field }) => (
+                <FormItem>
+                    <FormLabel className="text-Green-100">ঠিকানা</FormLabel>
                     <FormControl>
                         <Input {...field} className="bg-transparent border-black"/>
                     </FormControl>

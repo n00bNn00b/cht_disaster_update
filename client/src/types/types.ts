@@ -16,3 +16,13 @@ export interface Areas {
     date: string;
     __v: number
 }
+
+export interface Victim {
+    _id: string;
+    victimName: string;
+    familyMember: number;
+    contact: string;
+    address: string;
+    date: string;
+    __v: number
+}

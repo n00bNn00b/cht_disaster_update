@@ -44,7 +44,7 @@ const routes = createBrowserRouter([
                         element: <TeamProgress/>
                     },
                     {
-                        path: "victim-family",
+                        path: "victim-family-list",
                         element: <VictimFamilyForm/>
                     }
                 ]
