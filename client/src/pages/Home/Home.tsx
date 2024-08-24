@@ -52,16 +52,18 @@ const Home = () => {
         <CardContent>
           <Table>
             <TableHeader>
-              <TableRow>
-                <TableHead className="text-Green-200">Team Name</TableHead>
-                <TableHead className="text-Green-200">Status</TableHead>
-                <TableHead className="text-Green-200">Working Area</TableHead>
+              <TableRow className="font-bold text-xl">
+                <TableHead className="text-Green-200">টিমের নাম</TableHead>
+                <TableHead className="text-Green-200">স্ট্যাটাস</TableHead>
                 <TableHead className="text-Green-200">
-                  Provided Services
+                  কার্যক্রম এলাকা
                 </TableHead>
-                <TableHead className="text-Green-200">Contact No.</TableHead>
-                <TableHead className="text-Green-200">Date</TableHead>
-                <TableHead className="text-Green-200">Admin Status</TableHead>
+                <TableHead className="text-Green-200">সহায়তাসমূহ</TableHead>
+                <TableHead className="text-Green-200">যোগাযোগ</TableHead>
+                <TableHead className="text-Green-200">তারিখ</TableHead>
+                <TableHead className="text-Green-200">
+                  ভেরিফিকেশন স্ট্যাটাস
+                </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
