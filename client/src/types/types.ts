@@ -9,3 +9,10 @@ export interface Services {
     isVerifiedByAdmin?: boolean;
     __v?: number
 }
+
+export interface Areas {
+    _id: string;
+    areaName: string;
+    date: string;
+    __v: number
+}

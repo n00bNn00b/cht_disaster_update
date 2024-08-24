@@ -16,23 +16,39 @@ import { Input } from "@/components/ui/input"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
+import { useToast } from "@/components/ui/use-toast";
+import axios from "axios";
 
 const formSchema = z.object({
-  affectedArea: z.string().min(3, {
-    message: "affectedArea must be at least 3 characters.",
-  })
+  areaName: z.string().min(3, {
+    message: "areaName must be at least 3 characters.",
+  }),
+  date: z.date()
 })
 
 const AffectedAreas = () => {
+    const {toast} = useToast();
+    const date = new Date(); 
+    const url = import.meta.env.VITE_API_URL;
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            affectedArea: "",
+            areaName: "",
+            date: date
         },
       });
       
-    const onSubmit = (values: z.infer<typeof formSchema>) => {
+    const onSubmit = async (values: z.infer<typeof formSchema>) => {
         console.log(values)
+        try {
+          await axios.post(`${url}/areas/add`, values);
+          toast({
+            title: "Record saved to database"
+          })
+        } catch (error) {
+          console.error('Error:', error);
+        }
       }
 
     
@@ -40,14 +56,14 @@ const AffectedAreas = () => {
     <>
       <Card className="bg-white/80">
         <CardHeader>
-            <CardTitle className="text-xl font-bold font-special text-Green-100">Submit Affected Area List</CardTitle>
+            <CardTitle className="text-xl font-bold font-special text-Green-100">Affected Area</CardTitle>
         </CardHeader>
         <CardContent>
         <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <FormField
             control={form.control}
-            name="affectedArea"
+            name="areaName"
             render={({ field }) => (
                 <FormItem>
                 <FormLabel className="text-Green-100">Affected Area</FormLabel>

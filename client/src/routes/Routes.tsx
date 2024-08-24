@@ -1,4 +1,5 @@
 import Layout from "@/Layout/Layout";
+import AffectedAreasPage from "@/pages/AffectedAreas/AffectedAreas";
 import Home from "@/pages/Home/Home";
 import SignIn from "@/pages/SignIn/SignIn";
 import AffectedAreas from "@/pages/Submit/AffectedAreas";
@@ -19,6 +20,10 @@ const routes = createBrowserRouter([
             {
                 path: "/admin",
                 element: <SignIn/>
+            },
+            {
+                path: "/affected-areas",
+                element: <AffectedAreasPage/>
             },
             {
                 path: "/submit",

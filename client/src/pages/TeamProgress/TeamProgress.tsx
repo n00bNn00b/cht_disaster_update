@@ -58,7 +58,6 @@ const TeamProgress = () => {
       });
       
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
-        console.log(values)
         try {
             await axios.post(`${url}/services/add`, values);
             toast({
