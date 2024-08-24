@@ -12,7 +12,7 @@ const Submit = () => {
               : "text-white font-special font-bold hover:underline"
           }
         >
-          Team Progress
+          টিমের অগ্রগতি
         </NavLink>
         <NavLink
           to={"/submit/affected-areas"}
@@ -22,7 +22,7 @@ const Submit = () => {
               : "text-white font-special font-bold hover:underline"
           }
         >
-          Submit Affected Areas
+          দুর্গত এলাকার নাম হালনাগাদ
         </NavLink>
       </div>
       <div className="mt-4">
