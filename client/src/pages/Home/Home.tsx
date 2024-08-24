@@ -59,15 +59,19 @@ const Home = () => {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="text-Green-200">Team Name</TableHead>
-                <TableHead className="text-Green-200">Status</TableHead>
-                <TableHead className="text-Green-200">Working Area</TableHead>
+                <TableHead className="text-Green-200">টিমের নাম</TableHead>
                 <TableHead className="text-Green-200">
-                  Provided Services
+                  টিমের স্ট্যাটাস
                 </TableHead>
-                <TableHead className="text-Green-200">Contact No.</TableHead>
-                <TableHead className="text-Green-200">Date</TableHead>
-                <TableHead className="text-Green-200">Admin Status</TableHead>
+                <TableHead className="text-Green-200">
+                  কার্যক্রম এলাকা
+                </TableHead>
+                <TableHead className="text-Green-200">সহায়তাসমূহ</TableHead>
+                <TableHead className="text-Green-200">যোগাযোগ</TableHead>
+                <TableHead className="text-Green-200">হালনাগাদের সময়</TableHead>
+                <TableHead className="text-Green-200">
+                  ভেরিফিকেশন স্ট্যাটাস
+                </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
