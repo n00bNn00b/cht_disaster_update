@@ -4,7 +4,7 @@ const Submit = () => {
   return (
     <>
       <div className="flex flex-col gap-2">
-        <NavLink
+      <NavLink
           to={"/submit/team-progress"}
           className={({ isActive }) =>
             isActive
@@ -24,6 +24,7 @@ const Submit = () => {
         >
           দুর্গত এলাকার নাম হালনাগাদ
         </NavLink>
+
       </div>
       <div className="mt-4">
         <Outlet />
