@@ -1,7 +1,7 @@
 import Layout from "@/Layout/Layout";
+import AdminDashboard from "@/pages/AdminDashboard/AdminDashboard";
 import AffectedAreasPage from "@/pages/AffectedAreas/AffectedAreas";
 import Home from "@/pages/Home/Home";
-import SignIn from "@/pages/SignIn/SignIn";
 import AffectedAreas from "@/pages/Submit/AffectedAreas";
 import Submit from "@/pages/Submit/Submit";
 import TeamProgress from "@/pages/TeamProgress/TeamProgress";
@@ -19,7 +19,7 @@ const routes = createBrowserRouter([
             },
             {
                 path: "/admin",
-                element: <SignIn/>
+                element: <AdminDashboard/>
             },
             {
                 path: "/affected-areas",

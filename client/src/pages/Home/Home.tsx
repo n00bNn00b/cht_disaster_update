@@ -34,6 +34,12 @@ const Home = () => {
 
     fetchServices();
   }, [url]);
+
+  const convertDate = (isoDateString: string) => {
+    const date = new Date(isoDateString);
+    const formattedDate = date.toLocaleString();
+    return formattedDate;
+}
   return (
     <>
       <Card className="bg-white/80">
@@ -83,7 +89,7 @@ const Home = () => {
                     {service.contact}
                   </TableCell>
                   <TableCell className="text-Blue-200">
-                    {service.date}
+                    {convertDate(service.date)}
                   </TableCell>
                   <TableCell className="text-Blue-200">
                     {service.isVerifiedByAdmin

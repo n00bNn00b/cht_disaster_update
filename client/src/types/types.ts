@@ -5,7 +5,7 @@ export interface Services {
     contact?: string;
     providedService?: string;
     status?: string;
-    date?: string;
+    date: string;
     isVerifiedByAdmin?: boolean;
     __v?: number
 }
