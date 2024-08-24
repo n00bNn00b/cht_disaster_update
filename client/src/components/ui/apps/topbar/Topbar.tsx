@@ -26,8 +26,9 @@ const Topbar = () => {
                 <SheetHeader>
                   <div className="flex flex-col items-start gap-2">
                       <NavLink to={'/'} className={({isActive}) => isActive? "underline text-Green-100": "hover:underline text-Green-100"}>Home</NavLink>
-                      <NavLink to={'/submit'} className={({isActive}) => isActive? "underline text-Green-100": "hover:underline text-Green-100"}>Submit</NavLink>
                       <NavLink to={'/affected-areas'} className={({isActive}) => isActive? "underline text-Green-100": "hover:underline text-Green-100"}>Affected Areas</NavLink>
+                      <NavLink to={'/victim-family-list'} className={({isActive}) => isActive? "underline text-Green-100": "hover:underline text-Green-100"}>Family List</NavLink>
+                      <NavLink to={'/submit'} className={({isActive}) => isActive? "underline text-Green-100": "hover:underline text-Green-100"}>Submit</NavLink>
                   </div>
                 </SheetHeader>
               </SheetContent>
@@ -35,8 +36,9 @@ const Topbar = () => {
 
             <div className="hidden md:flex md:gap-4">
                 <NavLink to={'/'} className={({isActive}) => isActive? "underline": "hover:underline"}>Home</NavLink>
-                <NavLink to={'/submit'} className={({isActive}) => isActive? "underline": "hover:underline"}>Submit</NavLink>
                 <NavLink to={'/affected-areas'} className={({isActive}) => isActive? "underline": "hover:underline"}>Affected Areas</NavLink>
+                <NavLink to={'/victim-family-list'} className={({isActive}) => isActive? "underline": "hover:underline"}>Family List</NavLink>
+                <NavLink to={'/submit'} className={({isActive}) => isActive? "underline": "hover:underline"}>Submit</NavLink>
             </div>
         </div>
       </div>
