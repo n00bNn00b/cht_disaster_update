@@ -67,7 +67,7 @@ const Topbar = () => {
                 isActive ? "underline" : "hover:underline"
               }
             >
-              Home
+              মূল পাতা
             </NavLink>
             <NavLink
               to={"/submit"}
@@ -75,7 +75,7 @@ const Topbar = () => {
                 isActive ? "underline" : "hover:underline"
               }
             >
-              Submit
+              হালনাগাদ করুন
             </NavLink>
             <NavLink
               to={"/affected-areas"}
@@ -83,7 +83,7 @@ const Topbar = () => {
                 isActive ? "underline" : "hover:underline"
               }
             >
-              Affected Areas
+              দুর্গত এলাকাসমূহ
             </NavLink>
           </div>
         </div>
