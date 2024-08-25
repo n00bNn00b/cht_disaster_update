@@ -41,7 +41,7 @@ const AdminDashboard = () => {
         status: ""
     });
     const {toast} = useToast();
-    const url = import.meta.env.VITE_API_URL;
+    const url = "https://cht-disaster-update.onrender.com";
     const date = new Date();
 
     const fetchServices = async () => {

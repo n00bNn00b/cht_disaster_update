@@ -22,7 +22,7 @@ import { useEffect, useState } from "react";
 
 const Home = () => {
   const [services, setServices] = useState<Services[]>([]);
-  const url = import.meta.env.VITE_API_URL;
+  const url = "https://cht-disaster-update.onrender.com";
   const [currentPage, setCurrentPage] = useState(1); // State to track current page
   const [totalPages, setTotalPages] = useState(1); // State to track total pages
 

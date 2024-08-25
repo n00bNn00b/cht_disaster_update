@@ -28,7 +28,7 @@ const formSchema = z.object({
 
 const VictimFamilyForm = () => {
   const { toast } = useToast();
-  const url = import.meta.env.VITE_API_URL;
+  const url = "https://cht-disaster-update.onrender.com";
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

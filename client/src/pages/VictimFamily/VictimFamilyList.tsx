@@ -18,7 +18,7 @@ import { useEffect, useState } from "react";
 
 const VictimFamilyList = () => {
     const [victimList, setVictimList] = useState<Victim[]>([]);
-  const url = import.meta.env.VITE_API_URL;
+  const url = "https://cht-disaster-update.onrender.com";
   useEffect(() => {
     const fetchServices = async () => {
       try {
