@@ -75,7 +75,15 @@ router.get("/areas", async (req, res) => {
 router.put("/areas/:id", async (req, res) => {
   const id = req.params.id;
   const query = { _id: new mongoose.Types.ObjectId(id) };
-  const { areaName, date } = req.body;
+  const {
+    areaName,
+    families,
+    union,
+    subDistrict,
+    district,
+    representitive,
+    date,
+  } = req.body;
   try {
     const area = await Areas.findOne(query);
     if (!area) {
@@ -83,7 +91,12 @@ router.put("/areas/:id", async (req, res) => {
         error: "Area not found",
       });
     } else {
-      area.areaName = areaName; // Use areaName instead of teamName
+      area.areaName = areaName;
+      area.families = families;
+      area.union = union;
+      area.subDistrict = subDistrict;
+      area.district = district;
+      area.representitive = representitive;
       area.date = date;
       await area.save();
       res.status(200).json({ message: "Area updated successfully!" });
