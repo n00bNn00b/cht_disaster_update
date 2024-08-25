@@ -12,18 +12,18 @@ import {
     TableHeader,
     TableRow,
   } from "@/components/ui/table";
-import { Services } from "@/types/types";
+import { Victim } from "@/types/types";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
 const VictimFamilyList = () => {
-    const [services, setServices] = useState<Services[]>([]);
-  const url = import.meta.env.VITE_API_URL;
+    const [victimList, setVictimList] = useState<Victim[]>([]);
+  const url = "https://cht-disaster-update.onrender.com";
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const response = await axios.get<Services[]>(`${url}/services`);
-        setServices(response.data);
+        const response = await axios.get<Victim[]>(`${url}/victims`);
+        setVictimList(response.data);
       } catch (error) {
         console.log(error);
       }
@@ -31,34 +31,47 @@ const VictimFamilyList = () => {
 
     fetchServices();
   }, [url]);
+  const convertDate = (isoDateString: string) => {
+    const date = new Date(isoDateString);
+    const formattedDate = date.toLocaleString();
+    return formattedDate;
+}
   return (
     <>
       <Card className="bg-white/80">
         <CardHeader>
           <CardTitle className="text-xl font-bold font-special text-Green-100">
-            Victim Family List
+          ভিক্টিমের তালিকা
           </CardTitle>
         </CardHeader>
        <CardContent>
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="text-Green-200">Name(Family Head)</TableHead>
-                <TableHead className="text-Green-200">Family Members</TableHead>
-                <TableHead className="text-Green-200">Damaged Happened</TableHead>
+                <TableHead className="text-Green-200">ভিক্টিমের নাম</TableHead>
+                <TableHead className="text-Green-200">পরিবারের সদস্য সংখ্যা</TableHead>
+                <TableHead className="text-Green-200">যোগাযোগের নম্বরঃ</TableHead>
+                <TableHead className="text-Green-200">ঠিকানা</TableHead>
+                <TableHead className="text-Green-200">সংযুক্তির সময়</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {services.map((service) => (
-                <TableRow key={service._id}>
+              {victimList.map((victim) => (
+                <TableRow key={victim._id}>
                   <TableCell className="text-Blue-200">
-                    {service.teamName}
+                    {victim.victimName}
                   </TableCell>
                   <TableCell className="text-Blue-200">
-                    {service.status}
+                    {victim.familyMember}
                   </TableCell>
                   <TableCell className="text-Blue-200">
-                    {service.workingArea}
+                    {victim.contact}
+                  </TableCell>
+                  <TableCell className="text-Blue-200">
+                    {victim.address}
+                  </TableCell>
+                  <TableCell className="text-Blue-200">
+                    {convertDate(victim.date)}
                   </TableCell>
                 </TableRow>
               ))}

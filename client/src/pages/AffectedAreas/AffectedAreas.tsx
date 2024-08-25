@@ -18,7 +18,7 @@ import {
 
 const AffectedAreasPage = () => {
     const [areas, setAreas] = useState<Areas[]>([]);
-    const url = import.meta.env.VITE_API_URL;
+    const url = "https://cht-disaster-update.onrender.com";
     useEffect(() => {
       const fetchServices = async () => {
         try {

@@ -14,6 +14,7 @@ import { useForm } from "react-hook-form";
 import { useToast } from "@/components/ui/use-toast";
 import axios from "axios";
 
+
 const formSchema = z.object({
   areaName: z.string().min(3, {
     message: "areaName must be at least 3 characters.",
@@ -24,8 +25,8 @@ const formSchema = z.object({
 const AffectedAreas = () => {
   const { toast } = useToast();
   const date = new Date();
-  const url = import.meta.env.VITE_API_URL;
-
+  const url = "https://cht-disaster-update.onrender.com";
+  
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -44,6 +45,7 @@ const AffectedAreas = () => {
     } catch (error) {
       console.error("Error:", error);
     }
+    form.reset();
   };
 
   return (

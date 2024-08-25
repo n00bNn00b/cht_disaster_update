@@ -42,6 +42,8 @@ const AdminDashboard = () => {
     const [services, setServices] = useState<Services[]>([]);
     const [newServices, setNewServices] = useState<Services[]>([]);
     const [listName, setListName] = useState<string>("");
+    const [currentPage, setCurrentPage] = useState(1); // State to track current page
+    const [totalPages, setTotalPages] = useState(1); 
     const [formData, setFormData] = useState<formData>({
         teamName: "",
         workingArea: "",
@@ -50,14 +52,19 @@ const AdminDashboard = () => {
         status: ""
     });
     const {toast} = useToast();
-    const url = import.meta.env.VITE_API_URL;
+    const url = "https://cht-disaster-update.onrender.com";
     const date = new Date();
 
     const fetchServices = async () => {
         try {
-            const response = await axios.get<Services[]>(`${url}/services`);
-            setServices(response.data);
-            setNewServices(response.data);
+            const pageSize = 20; // Number of records per page (same as backend)
+        const response = await axios.get(
+          `${url}/services?page=${currentPage}&limit=${pageSize}` // Add pagination parameters
+        );
+        console.log(response.data)
+        setServices(response.data.data);
+        setNewServices(response.data.data);
+        setTotalPages(Math.ceil(response.data.totalRecords / pageSize)); 
         } catch (error) {
             console.log(error);
         }
@@ -130,6 +137,18 @@ const AdminDashboard = () => {
         .catch(error => console.log(error));
 };
 
+const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
   return (
     <>
       <div className='flex gap-4 w-full'>
@@ -150,15 +169,15 @@ const AdminDashboard = () => {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="text-Green-200">Team Name</TableHead>
-                <TableHead className="text-Green-200">Status</TableHead>
-                <TableHead className="text-Green-200">Working Area</TableHead>
-                <TableHead className="text-Green-200">
+                <TableHead className="text-Green-200 font-bold">Team Name</TableHead>
+                <TableHead className="text-Green-200 font-bold">Status</TableHead>
+                <TableHead className="text-Green-200 font-bold">Working Area</TableHead>
+                <TableHead className="text-Green-200 font-bold">
                   Provided Services
                 </TableHead>
-                <TableHead className="text-Green-200">Contact No.</TableHead>
-                <TableHead className="text-Green-200">Date</TableHead>
-               <TableHead className="text-Green-200">Action</TableHead>
+                <TableHead className="text-Green-200 font-bold">Contact No.</TableHead>
+                <TableHead className="text-Green-200 font-bold">Date</TableHead>
+               <TableHead className="text-Green-200 font-bold">Action</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -247,6 +266,18 @@ const AdminDashboard = () => {
               ))}
             </TableBody>
           </Table>
+          <div className="flex justify-between mt-4">
+            {currentPage > 1 && (
+              <button onClick={handlePreviousPage} className="px-10 py-2 rounded-md bg-Green-200 text-white">
+                Previous Page
+              </button>
+            )}
+            {currentPage < totalPages && (
+              <button onClick={handleNextPage} className="px-10 py-2 rounded-md bg-Green-200 text-white">
+                Next Page
+              </button>
+            )}
+          </div>
         </CardContent>
       </Card>
     </>
