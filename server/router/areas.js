@@ -22,10 +22,37 @@ router.post("/areas/add", async (req, res) => {
   }
 });
 
+// router.get("/areas", async (req, res) => {
+//   try {
+//     const areas = await Areas.find();
+//     res.status(200).json(areas);
+//   } catch (error) {
+//     res.status(500).json({ error: "Internal Server Error!" });
+//   }
+// });
+
+//get api for areas with pagination
 router.get("/areas", async (req, res) => {
   try {
-    const areas = await Areas.find();
-    res.status(200).json(areas);
+    const page = parseInt(req.query.page) || 1;
+    const limit = 10; // Adjust the limit as needed
+
+    const areas = await Areas.find()
+      .sort({
+        date: -1,
+      })
+      .skip((page - 1) * limit)
+      .limit(limit);
+
+    const totalRecords = await Areas.countDocuments();
+    const totalPages = Math.ceil(totalRecords / limit);
+
+    res.status(200).json({
+      data: areas,
+      currentPage: page,
+      totalPages,
+      totalRecords,
+    });
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error!" });
   }

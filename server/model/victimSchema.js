@@ -7,7 +7,6 @@ const victimSchema = new mongoose.Schema({
   },
   familyMember: {
     type: Number,
-    required: true,
   },
   contact: {
     type: String,
@@ -16,6 +15,16 @@ const victimSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  union: {
+    type: String,
+  },
+  subDistrict: {
+    type: String,
+  },
+  district: {
+    type: String,
+  },
+
   status: {
     type: String,
   },
