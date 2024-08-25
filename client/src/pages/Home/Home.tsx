@@ -1,5 +1,6 @@
 import { AlertDialog } from "@/components/ui/alert-dialog";
 import Modal from "@/components/ui/apps/topbar/Modal/Modal";
+import { Badge } from "@/components/ui/badge";
 import {
   Card,
   CardContent,
@@ -80,17 +81,17 @@ const Home = () => {
         <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="text-Green-200">টিমের নাম</TableHead>
-                <TableHead className="text-Green-200">
+                <TableHead className="text-Green-200 font-bold">টিমের নাম</TableHead>
+                <TableHead className="text-Green-200 font-bold">
                   টিমের স্ট্যাটাস
                 </TableHead>
-                <TableHead className="text-Green-200">
+                <TableHead className="text-Green-200 font-bold">
                   কার্যক্রম এলাকা
                 </TableHead>
-                <TableHead className="text-Green-200">সহায়তাসমূহ</TableHead>
-                <TableHead className="text-Green-200">যোগাযোগ</TableHead>
-                <TableHead className="text-Green-200">হালনাগাদের সময়</TableHead>
-                <TableHead className="text-Green-200">
+                <TableHead className="text-Green-200 font-bold">সহায়তাসমূহ</TableHead>
+                <TableHead className="text-Green-200 font-bold">যোগাযোগ</TableHead>
+                <TableHead className="text-Green-200 font-bold">হালনাগাদের সময়</TableHead>
+                <TableHead className="text-Green-200 font-bold">
                   ভেরিফিকেশন স্ট্যাটাস
                 </TableHead>
               </TableRow>
@@ -118,8 +119,8 @@ const Home = () => {
                   </TableCell>
                   <TableCell className="text-Blue-200">
                     {service.isVerifiedByAdmin
-                      ? "Verified by IAU"
-                      : "Still not verified"}
+                      ? <Badge variant="outline" className="bg-Green-200 text-white">Verified by IAU</Badge>
+                      : <Badge variant="outline" className="bg-yellow-300 text-white">Still not verified</Badge>}
                   </TableCell>
                 </TableRow>
               ))}
