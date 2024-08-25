@@ -23,6 +23,18 @@ const formSchema = z.object({
   address: z.string().min(3, {
     message: "address must be at least 3 characters.",
   }),
+  union: z.string().min(3, {
+    message: "address must be at least 3 characters.",
+  }),
+  subDistrict: z.string().min(3, {
+    message: "address must be at least 3 characters.",
+  }),
+  district: z.string().min(3, {
+    message: "address must be at least 3 characters.",
+  }),
+  status: z.string().min(3, {
+    message: "address must be at least 3 characters.",
+  }),
   date: z.date(),
 });
 
@@ -36,6 +48,10 @@ const VictimFamilyForm = () => {
       victimName: "",
       contact: "",
       address: "",
+      union: "",
+      subDistrict: "",
+      district: "",
+      status: "",
       date: new Date(),
     },
   });
@@ -120,7 +136,55 @@ const VictimFamilyForm = () => {
                 name="address"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-Green-100">ঠিকানা</FormLabel>
+                    <FormLabel className="text-Green-100">গ্রামের নাম</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        className="bg-transparent border-black"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="union"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-Green-100">ইউনিয়ন</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        className="bg-transparent border-black"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="subDistrict"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-Green-100">উপজেলা</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        className="bg-transparent border-black"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="district"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-Green-100">জেলা</FormLabel>
                     <FormControl>
                       <Input
                         {...field}

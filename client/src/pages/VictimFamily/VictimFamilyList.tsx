@@ -48,11 +48,14 @@ const VictimFamilyList = () => {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="text-Green-200">ভিক্টিমের নাম</TableHead>
-                <TableHead className="text-Green-200">পরিবারের সদস্য সংখ্যা</TableHead>
-                <TableHead className="text-Green-200">যোগাযোগের নম্বরঃ</TableHead>
-                <TableHead className="text-Green-200">ঠিকানা</TableHead>
-                <TableHead className="text-Green-200">সংযুক্তির সময়</TableHead>
+                <TableHead className="text-Green-200 font-bold">নাম</TableHead>
+                <TableHead className="text-Green-200 font-bold">পরিবারের সদস্য সংখ্যা</TableHead>
+                <TableHead className="text-Green-200 font-bold">যোগাযোগের নম্বরঃ</TableHead>
+                <TableHead className="text-Green-200 font-bold">গ্রামের নাম</TableHead>
+                <TableHead className="text-Green-200 font-bold">ইউনিয়ন</TableHead>
+                <TableHead className="text-Green-200 font-bold">উপজেলা</TableHead>
+                <TableHead className="text-Green-200 font-bold">জেলা</TableHead>
+                <TableHead className="text-Green-200 font-bold">সংযুক্তির সময়</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -69,6 +72,15 @@ const VictimFamilyList = () => {
                   </TableCell>
                   <TableCell className="text-Blue-200">
                     {victim.address}
+                  </TableCell>
+                  <TableCell className="text-Blue-200">
+                    {victim.union}
+                  </TableCell>
+                  <TableCell className="text-Blue-200">
+                    {victim.subDistrict}
+                  </TableCell>
+                  <TableCell className="text-Blue-200">
+                    {victim.district}
                   </TableCell>
                   <TableCell className="text-Blue-200">
                     {convertDate(victim.date)}
