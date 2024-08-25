@@ -66,6 +66,7 @@ const AdminDashboard = () => {
             );
             console.log(response.data)
             setServices(response.data.data);
+            setNewServices(response.data.data);
             setTotalPages(Math.ceil(response.data.totalRecords / pageSize)); 
             } catch (error) {
                 console.log(error);
@@ -123,6 +124,19 @@ const AdminDashboard = () => {
             isVerifiedByAdmin: true,
             date: date
         }
+
+        const data1 = {
+          _id: id,
+          teamName: formData.teamName,
+          workingArea: formData.workingArea,
+          contact: formData.contact,
+          providedService: formData.providedService,
+          status: formData.status,
+          isVerifiedByAdmin: true,
+          date: date.toLocaleString(),
+          __v: 0
+      }
+
         await axios.put(`${url}/services/${id}`, data)
         .then(res => {
             console.log(res)
@@ -133,6 +147,11 @@ const AdminDashboard = () => {
             }
         })
         .catch(error => console.log(error));
+        setNewServices((prevServices) =>
+          prevServices.map((service) =>
+              service._id === id ? { ...service, ...data1 } : service
+          )
+      );
 };
 
 const handleNextPage = () => {
@@ -146,6 +165,15 @@ const handlePreviousPage = () => {
       setCurrentPage(currentPage - 1);
     }
   };
+
+const handleDelete = async (id:string) => {
+  await axios.delete(`${url}/services/${id}`);
+  toast({
+    title: "Service record has been deleted"
+  });
+  const currentservices = services.filter(service => service._id !== id)
+  setNewServices(currentservices);
+}
 
   return (
     <>
@@ -256,9 +284,21 @@ const handlePreviousPage = () => {
                     </AlertDialogContent>
                   </AlertDialog>
 
-                  <button className="px-2 py-1 bg-red-700 rounded-md text-white">Delete</button>
-                  </TableCell>
-                 
+                  <AlertDialog>
+                    <AlertDialogTrigger>
+                      <button className="px-2 py-1 bg-red-700 rounded-md text-white">Delete</button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                      </AlertDialogHeader>
+                      <AlertDialogFooter>
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogAction onClick={() => handleDelete(service._id)} className="bg-red-700">Delete</AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
+                 </TableCell>
                 </TableRow>
               ))}
             </TableBody>

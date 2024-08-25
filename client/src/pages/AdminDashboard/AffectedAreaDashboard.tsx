@@ -28,6 +28,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { Areas } from "@/types/types";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import AdmitCard from "./AdmitCard";
 
 interface formData {
   areaName?: string;
@@ -61,7 +62,6 @@ const AffectedAreaDashboard = () => {
             const response = await axios.get(
               `${url}/areas?page=${currentPage}&limit=${pageSize}` // Add pagination parameters
             );
-            console.log(response.data)
             setAreas(response.data.data);
             setTotalPages(Math.ceil(response.data.totalRecords / pageSize)); 
             } catch (error) {
@@ -109,6 +109,18 @@ const AffectedAreaDashboard = () => {
             representitive: formData.representitive,
             date: date
         }
+
+        const data1 = {
+          _id: id,
+          areaName: formData.areaName,
+          families: formData.families,
+          union: formData.union,
+          subDistrict: formData.subDistrict,
+          district: formData.district,
+          representitive: formData.representitive,
+          date: date.toLocaleString(),
+          __v: 0
+      }
         await axios.put(`${url}/areas/${id}`, data)
         .then(res => {
             console.log(res)
@@ -119,6 +131,11 @@ const AffectedAreaDashboard = () => {
             }
         })
         .catch(error => console.log(error));
+        setAreas((prevAreas) =>
+          prevAreas.map((area) =>
+              area._id === id ? { ...area, ...data1 } : area
+          )
+      );
 };
 
 const handleNextPage = () => {
@@ -133,10 +150,18 @@ const handlePreviousPage = () => {
     }
   };
 
-
+const handleDelete = async (id:string) => {
+  await axios.delete(`${url}/areas/${id}`);
+  toast({
+    title: "Area record has been deleted"
+  });
+  const newAreas = areas.filter(area => area._id !== id)
+  setAreas(newAreas);
+}
 
   return (
     <>
+      <AdmitCard/>
       <Card className="bg-white/80 mt-6">
         <CardHeader>
           <CardTitle className="text-xl font-bold font-special text-Green-100">
@@ -184,7 +209,7 @@ const handlePreviousPage = () => {
                   <TableCell className="text-Blue-200 flex gap-1">
                   <AlertDialog>
                     <AlertDialogTrigger>
-                    <button onClick={() => handleClickUpdate(area._id)} className="px-2 py-1 bg-Green-100 rounded-md text-white">Verify</button>
+                    <button onClick={() => handleClickUpdate(area._id)} className="px-2 py-1 bg-Green-100 rounded-md text-white">Edit</button>
                     </AlertDialogTrigger>
                     <AlertDialogContent>
                       <AlertDialogHeader>
@@ -242,7 +267,7 @@ const handlePreviousPage = () => {
                       </AlertDialogHeader>
                       <AlertDialogFooter>
                         <AlertDialogCancel>Cancel</AlertDialogCancel>
-                        <AlertDialogAction onClick={() => handleVerify(area._id)}>Verify</AlertDialogAction>
+                        <AlertDialogAction onClick={() => handleVerify(area._id)}>Update</AlertDialogAction>
                       </AlertDialogFooter>
                     </AlertDialogContent>
                   </AlertDialog>
@@ -257,7 +282,7 @@ const handlePreviousPage = () => {
                       </AlertDialogHeader>
                       <AlertDialogFooter>
                         <AlertDialogCancel>Cancel</AlertDialogCancel>
-                        <AlertDialogAction className="bg-red-700">Delete</AlertDialogAction>
+                        <AlertDialogAction onClick={() => handleDelete(area._id)} className="bg-red-700">Delete</AlertDialogAction>
                       </AlertDialogFooter>
                     </AlertDialogContent>
                   </AlertDialog>
