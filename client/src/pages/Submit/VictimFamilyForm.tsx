@@ -23,18 +23,10 @@ const formSchema = z.object({
   address: z.string().min(3, {
     message: "address must be at least 3 characters.",
   }),
-  union: z.string().min(3, {
-    message: "address must be at least 3 characters.",
-  }),
-  subDistrict: z.string().min(3, {
-    message: "address must be at least 3 characters.",
-  }),
-  district: z.string().min(3, {
-    message: "address must be at least 3 characters.",
-  }),
-  status: z.string().min(3, {
-    message: "address must be at least 3 characters.",
-  }),
+  union: z.string(),
+  subDistrict: z.string(),
+  district: z.string(),
+  status: z.string(),
   date: z.date(),
 });
 
