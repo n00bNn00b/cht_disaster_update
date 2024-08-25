@@ -29,14 +29,15 @@ import { useToast } from "@/components/ui/use-toast";
 import { Services } from "@/types/types";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import AdmitCard from "./AdmitCard";
 
-  interface formData {
-    teamName?: string;
-    workingArea?: string;
-    contact?: string;
-    providedService?: string;
-    status?: string;
+
+interface formData {
+  teamName?: string;
+  workingArea?: string;
+  contact?: string;
+  providedService?: string;
+  status?: string;
 }
 
 const AdminDashboard = () => {
@@ -149,12 +150,7 @@ const handlePreviousPage = () => {
 
   return (
     <>
-      <NavLink to="/admin/affected-area" className={({ isActive }) =>
-            isActive
-              ? "underline text-white font-special font-bold"
-              : "text-white font-special font-bold hover:underline"
-          }>দুর্গত এলাকাসমূহ
-      </NavLink>
+      <AdmitCard/>
       <Card className="bg-white/80 mt-6">
         <CardHeader>
           <CardTitle className="text-xl font-bold font-special text-Green-100">
