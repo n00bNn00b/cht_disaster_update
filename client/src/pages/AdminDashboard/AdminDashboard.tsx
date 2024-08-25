@@ -57,7 +57,8 @@ const AdminDashboard = () => {
     const url = "https://cht-disaster-update.onrender.com";
     const date = new Date();
 
-    const fetchServices = async () => {
+    useEffect(() => {
+      const fetchServices = async () => {
         try {
             const pageSize = 20; // Number of records per page (same as backend)
             const response = await axios.get(
@@ -70,9 +71,8 @@ const AdminDashboard = () => {
                 console.log(error);
         }
         };
-    useEffect(() => {
         fetchServices();
-     });
+     }, [currentPage]);
 
     const convertDate = (isoDateString: string) => {
         const date = new Date(isoDateString);
@@ -125,7 +125,6 @@ const AdminDashboard = () => {
         }
         await axios.put(`${url}/services/${id}`, data)
         .then(res => {
-            fetchServices();
             console.log(res)
             if(res.status === 200) {
                 toast({
