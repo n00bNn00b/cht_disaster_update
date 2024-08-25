@@ -29,9 +29,8 @@ import { useToast } from "@/components/ui/use-toast";
 import { Services } from "@/types/types";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
 
-  interface formData {
+interface formData {
     teamName?: string;
     workingArea?: string;
     contact?: string;
@@ -39,7 +38,7 @@ import { NavLink } from "react-router-dom";
     status?: string;
 }
 
-const AdminDashboard = () => {
+const AffectedAreaDashboard = () => {
     const [services, setServices] = useState<Services[]>([]);
     const [newServices, setNewServices] = useState<Services[]>([]);
     const [listName, setListName] = useState<string>("");
@@ -149,12 +148,6 @@ const handlePreviousPage = () => {
 
   return (
     <>
-      <NavLink to="/admin/affected-area" className={({ isActive }) =>
-            isActive
-              ? "underline text-white font-special font-bold"
-              : "text-white font-special font-bold hover:underline"
-          }>দুর্গত এলাকাসমূহ
-      </NavLink>
       <Card className="bg-white/80 mt-6">
         <CardHeader>
           <CardTitle className="text-xl font-bold font-special text-Green-100">
@@ -286,4 +279,4 @@ const handlePreviousPage = () => {
   )
 }
 
-export default AdminDashboard
+export default AffectedAreaDashboard

@@ -8,6 +8,8 @@ import {
     Table,
     TableBody,
     TableCell,
+    TableHead,
+    TableHeader,
     TableRow,
   } from "@/components/ui/table";
   import { Areas } from "@/types/types";
@@ -56,6 +58,12 @@ const AffectedAreasPage = () => {
           </CardHeader>
          <CardContent>
             <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="text-Green-200">দুর্গত এলাকাসমূহ</TableHead>
+                  
+                </TableRow>
+              </TableHeader>
               <TableBody>
                 {areas.map((area) => (
                   <TableRow key={area._id}>

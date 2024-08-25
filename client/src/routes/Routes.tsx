@@ -1,5 +1,6 @@
 import Layout from "@/Layout/Layout";
 import AdminDashboard from "@/pages/AdminDashboard/AdminDashboard";
+import AffectedAreaDashboard from "@/pages/AdminDashboard/AffectedAreaDashboard";
 import AffectedAreasPage from "@/pages/AffectedAreas/AffectedAreas";
 import Home from "@/pages/Home/Home";
 import AffectedAreas from "@/pages/Submit/AffectedAreas";
@@ -20,8 +21,12 @@ const routes = createBrowserRouter([
                 element: <Home/>
             },
             {
-                path: "/admin",
-                element: <AdminDashboard/>
+                path: "/admin/verify",
+                element: <AdminDashboard/>,
+            },
+            {
+                path: "admin/affected-area",
+                element: <AffectedAreaDashboard/>
             },
             {
                 path: "/affected-areas",
