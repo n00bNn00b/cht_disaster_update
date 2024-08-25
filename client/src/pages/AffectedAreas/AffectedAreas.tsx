@@ -18,19 +18,36 @@ import {
 
 const AffectedAreasPage = () => {
     const [areas, setAreas] = useState<Areas[]>([]);
+    const [currentPage, setCurrentPage] = useState(1); // State to track current page
+    const [totalPages, setTotalPages] = useState(1); 
     const url = "https://cht-disaster-update.onrender.com";
     useEffect(() => {
       const fetchServices = async () => {
         try {
-          const response = await axios.get<Areas[]>(`${url}/areas`);
-          setAreas(response.data);
+          const pageSize = 10;
+          const response = await axios.get(`${url}/areas?page=${currentPage}&limit=${pageSize}`);
+          setTotalPages(Math.ceil(response.data.totalRecords / pageSize));
+          setAreas(response.data.data);
         } catch (error) {
           console.log(error);
         }
       };
   
       fetchServices();
-    }, [url]);
+    }, [url, currentPage]);
+
+    const handleNextPage = () => {
+      if (currentPage < totalPages) {
+        setCurrentPage(currentPage + 1);
+      }
+    };
+  
+  const handlePreviousPage = () => {
+      if (currentPage > 1) {
+        setCurrentPage(currentPage - 1);
+      }
+    };
+
     return (
       <>
         <Card className="bg-white/80">
@@ -57,6 +74,18 @@ const AffectedAreasPage = () => {
                 ))}
               </TableBody>
             </Table>
+            <div className="flex justify-between mt-4">
+            {currentPage > 1 && (
+              <button onClick={handlePreviousPage} className="px-10 py-2 rounded-md bg-Green-200 text-white">
+                Previous Page
+              </button>
+            )}
+            {currentPage < totalPages && (
+              <button onClick={handleNextPage} className="px-10 py-2 rounded-md bg-Green-200 text-white">
+                Next Page
+              </button>
+            )}
+          </div>
           </CardContent>
         </Card>
       </>
