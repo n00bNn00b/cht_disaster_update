@@ -67,6 +67,22 @@ router.get("/services", async (req, res) => {
   }
 });
 
+// individual service
+router.get("/services/:id", async (req, res) => {
+  try {
+    const serviceId = req.params.id;
+
+    const service = await Services.findById(serviceId);
+
+    if (!service) {
+      return res.status(404).json({ error: "Service not found" });
+    }
+
+    res.status(200).json(service);
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error!" });
+  }
+});
 //update
 router.put("/services/:id", async (req, res) => {
   const id = req.params.id;
