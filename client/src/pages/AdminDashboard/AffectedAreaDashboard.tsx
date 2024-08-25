@@ -1,7 +1,6 @@
 import {
     Card,
     CardContent,
-    CardDescription,
     CardHeader,
     CardTitle,
   } from "@/components/ui/card";
@@ -26,50 +25,50 @@ import {
   } from "@/components/ui/alert-dialog"
   
 import { useToast } from "@/components/ui/use-toast";
-import { Services } from "@/types/types";
+import { Areas } from "@/types/types";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
 interface formData {
-    teamName?: string;
-    workingArea?: string;
-    contact?: string;
-    providedService?: string;
-    status?: string;
+  areaName?: string;
+  families?: number;
+  union?: string;
+  subDistrict?: string;
+  district?: string;
+  representitive?: string;
 }
 
 const AffectedAreaDashboard = () => {
-    const [services, setServices] = useState<Services[]>([]);
-    const [newServices, setNewServices] = useState<Services[]>([]);
-    const [listName, setListName] = useState<string>("");
+    const [areas, setAreas] = useState<Areas[]>([]);
     const [currentPage, setCurrentPage] = useState(1); // State to track current page
     const [totalPages, setTotalPages] = useState(1); 
     const [formData, setFormData] = useState<formData>({
-        teamName: "",
-        workingArea: "",
-        contact: "",
-        providedService: "",
-        status: ""
+      areaName:"",
+      families: 0,
+      union:"",
+      subDistrict:"",
+      district:"",
+      representitive:"",
     });
     const {toast} = useToast();
     const url = "https://cht-disaster-update.onrender.com";
     const date = new Date();
 
-    const fetchServices = async () => {
+    const fetchAreas = async () => {
         try {
             const pageSize = 20; // Number of records per page (same as backend)
             const response = await axios.get(
-              `${url}/services?page=${currentPage}&limit=${pageSize}` // Add pagination parameters
+              `${url}/areas?page=${currentPage}&limit=${pageSize}` // Add pagination parameters
             );
             console.log(response.data)
-            setServices(response.data.data);
+            setAreas(response.data.data);
             setTotalPages(Math.ceil(response.data.totalRecords / pageSize)); 
             } catch (error) {
                 console.log(error);
         }
         };
     useEffect(() => {
-        fetchServices();
+        fetchAreas();
      });
 
     const convertDate = (isoDateString: string) => {
@@ -78,26 +77,15 @@ const AffectedAreaDashboard = () => {
         return formattedDate;
     }
 
-    const handleVerifiedList = () => {
-        setListName("Verified List");
-        const verifiedList = services.filter(service => service.isVerifiedByAdmin === true);
-        setNewServices(verifiedList);
-    };
-
-    const handleUnverifiedList = () => {
-        setListName("Unverified List");
-        const unverifiedList = services.filter(service => service.isVerifiedByAdmin === false);
-        setNewServices(unverifiedList);
-    }
-
     const handleClickUpdate = (id: string) => {
-        const singleService = newServices.find(service => service._id === id);
+        const singleArea = areas.find(area => area._id === id);
         setFormData({
-            teamName: singleService?.teamName,
-            workingArea: singleService?.workingArea,
-            contact: singleService?.contact,
-            providedService: singleService?.providedService,
-            status: singleService?.status
+          areaName: singleArea?.areaName,
+          families: singleArea?.families,
+          union: singleArea?.union,
+          subDistrict: singleArea?.subDistrict,
+          district: singleArea?.district,
+          representitive: singleArea?.representitive
         })
     }
 
@@ -113,17 +101,17 @@ const AffectedAreaDashboard = () => {
 
     const handleVerify = async (id: string) => {
         const data = {
-            teamName: formData.teamName,
-            workingArea: formData.workingArea,
-            contact: formData.contact,
-            providedService: formData.providedService,
-            status: formData.status,
-            isVerifiedByAdmin: true,
+            areaName: formData.areaName,
+            families: formData.families,
+            union: formData.union,
+            subDistrict: formData.subDistrict,
+            district: formData.district,
+            representitive: formData.representitive,
             date: date
         }
-        await axios.put(`${url}/services/${id}`, data)
+        await axios.put(`${url}/areas/${id}`, data)
         .then(res => {
-            fetchServices();
+            fetchAreas();
             console.log(res)
             if(res.status === 200) {
                 toast({
@@ -132,6 +120,7 @@ const AffectedAreaDashboard = () => {
             }
         })
         .catch(error => console.log(error));
+        fetchAreas();
 };
 
 const handleNextPage = () => {
@@ -151,97 +140,101 @@ const handlePreviousPage = () => {
       <Card className="bg-white/80 mt-6">
         <CardHeader>
           <CardTitle className="text-xl font-bold font-special text-Green-100">
-            {listName? listName : "CHT Disaster Updates"}
+           দুর্গত এলাকাসমূহ
           </CardTitle>
-          <CardDescription>
-          <div className='flex gap-4 w-full'>
-            <button onClick={handleVerifiedList} className={listName === "Verified List"? 'font-special font-semibold bg-Green-200 text-White px-4 py-1 rounded-2xl': 'font-special font-semibold bg-Blue-100 text-White px-4 py-1 rounded-2xl'}>Verified</button>
-            <button onClick={handleUnverifiedList} className={listName === "Unverified List"? 'font-special font-semibold bg-Green-200 text-White px-4 py-1 rounded-2xl': 'font-special font-semibold bg-Blue-100 text-White px-4 py-1 rounded-2xl'}>Unverified</button>
-          </div>
-          </CardDescription>
         </CardHeader>
        <CardContent>
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="text-Green-200 font-bold">টিমের নাম</TableHead>
-                <TableHead className="text-Green-200 font-bold">টিমের স্ট্যাটাস</TableHead>
-                <TableHead className="text-Green-200 font-bold">কার্যক্রম এলাকা</TableHead>
-                <TableHead className="text-Green-200 font-bold">
-                সহায়তাসমূহ
-                </TableHead>
-                <TableHead className="text-Green-200 font-bold">যোগাযোগ</TableHead>
+              <TableHead className="text-Green-200 font-bold">এলাকার নাম</TableHead>
+                <TableHead className="text-Green-200 font-bold">পরিবার সংখ্যা</TableHead>
+                <TableHead className="text-Green-200 font-bold">ইউনিয়ন</TableHead>
+                <TableHead className="text-Green-200 font-bold">উপজেলা</TableHead>
+                <TableHead className="text-Green-200 font-bold">জেলা</TableHead>
+                <TableHead className="text-Green-200 font-bold">যোগাযোগের প্রতিনিধি</TableHead>
                 <TableHead className="text-Green-200 font-bold">হালনাগাদের সময়</TableHead>
                <TableHead className="text-Green-200 font-bold">অ্যাকশন</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {newServices.map((service) => (
-                <TableRow key={service._id}>
+              {areas.map((area) => (
+                <TableRow key={area._id}>
                   <TableCell className="text-Blue-200">
-                    {service.teamName}
+                    {area.areaName}
                   </TableCell>
                   <TableCell className="text-Blue-200">
-                  {service.status}
+                  {area.families}
                   </TableCell>
                   <TableCell className="text-Blue-200">
-                  {service.workingArea}
+                  {area.union}
                   </TableCell>
                   <TableCell className="text-Blue-200">
-                  {service.providedService}
+                  {area.subDistrict}
                   </TableCell>
                   <TableCell className="text-Blue-200">
-                  {service.contact}
+                  {area.district}
                   </TableCell>
                   <TableCell className="text-Blue-200">
-                    {convertDate(service.date)}
+                  {area.representitive}
+                  </TableCell>
+                  <TableCell className="text-Blue-200">
+                    {convertDate(area.date)}
                   </TableCell>
                   <TableCell className="text-Blue-200 flex gap-1">
                   <AlertDialog>
                     <AlertDialogTrigger>
-                    <button onClick={() => handleClickUpdate(service._id)} className="px-2 py-1 bg-Green-100 rounded-md text-white">Verify</button>
+                    <button onClick={() => handleClickUpdate(area._id)} className="px-2 py-1 bg-Green-100 rounded-md text-white">Verify</button>
                     </AlertDialogTrigger>
                     <AlertDialogContent>
                       <AlertDialogHeader>
                         <AlertDialogTitle>Verify Information</AlertDialogTitle>
                         <AlertDialogDescription className="flex flex-col gap-3">
                         <div className="flex flex-col gap-1">
-                          <label>টিমের নাম</label>
-                          <input value={formData.teamName} 
+                          <label>এলাকার নাম</label>
+                          <input value={formData.areaName} 
                                   className="w-full h-8 bg-Blue-100/20 rounded-md pl-1"
-                                  name="teamName"
+                                  name="areaName"
                                   onChange={handleChange}
                           />
                         </div>
                         <div className="flex flex-col gap-1">
-                          <label>স্ট্যাটাস</label>
-                          <input value={formData.status} 
+                          <label>পরিবার সংখ্যা</label>
+                          <input value={formData.families} 
                                 className="w-full h-8 bg-Blue-100/20 rounded-md pl-1"
-                                name="status"
+                                name="families"
                                 onChange={handleChange}
                           />
                         </div>
                         <div className="flex flex-col gap-1">
-                          <label>কার্যক্রম এলাকা</label>
-                          <input value={formData.workingArea}
+                          <label>ইউনিয়ন</label>
+                          <input value={formData.union}
                                className="w-full h-8 bg-Blue-100/20 rounded-md pl-1"
-                               name="workingArea"
+                               name="union"
                                onChange={handleChange}
                           />
                         </div>
                         <div className="flex flex-col gap-1">
-                          <label>সহায়তাসমূহ</label>
-                          <input value={formData.providedService} 
+                          <label>উপজেলা</label>
+                          <input value={formData.subDistrict} 
                                className="w-full h-8 bg-Blue-100/20 rounded-md pl-1"
-                               name="providedService"
+                               name="subDistrict"
+                               onChange={handleChange}
+                          />
+                        </div>
+                        <div className="flex flex-col gap-1">
+                          <label>জেলা</label>
+                          <input value={formData.district} 
+                               className="w-full h-8 bg-Blue-100/20 rounded-md pl-1"
+                               name="district"
                                onChange={handleChange}
                           />
                         </div>
                         <div className="flex flex-col gap-1">
                           <label>যোগাযোগ</label>
-                          <input value={formData.contact} 
+                          <input value={formData.representitive} 
                                className="w-full h-8 bg-Blue-100/20 rounded-md pl-1"
-                               name="contact"
+                               name="representitive"
                                onChange={handleChange}
                           />
                         </div>
@@ -249,7 +242,7 @@ const handlePreviousPage = () => {
                       </AlertDialogHeader>
                       <AlertDialogFooter>
                         <AlertDialogCancel>Cancel</AlertDialogCancel>
-                        <AlertDialogAction onClick={() => handleVerify(service._id)}>Verify</AlertDialogAction>
+                        <AlertDialogAction onClick={() => handleVerify(area._id)}>Verify</AlertDialogAction>
                       </AlertDialogFooter>
                     </AlertDialogContent>
                   </AlertDialog>
