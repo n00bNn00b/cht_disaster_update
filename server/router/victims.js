@@ -41,8 +41,25 @@ router.post("/victims/add", async (req, res) => {
 
 router.get("/victims", async (req, res) => {
   try {
-    const areas = await Victims.find();
-    res.status(200).json(areas);
+    const page = parseInt(req.query.page) || 1;
+    const limit = 10; // Adjust the limit as needed
+
+    const victims = await Victims.find()
+      .sort({
+        date: -1,
+      })
+      .skip((page - 1) * limit)
+      .limit(limit);
+
+    const totalRecords = await Victims.countDocuments();
+    const totalPages = Math.ceil(totalRecords / limit);
+
+    res.status(200).json({
+      data: victims,
+      currentPage: page,
+      totalPages,
+      totalRecords,
+    });
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error!" });
   }
