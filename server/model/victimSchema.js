@@ -8,6 +8,9 @@ const victimSchema = new mongoose.Schema({
   familyMember: {
     type: Number,
   },
+  damages: {
+    type: String,
+  },
   contact: {
     type: String,
   },

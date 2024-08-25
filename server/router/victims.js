@@ -8,6 +8,7 @@ router.post("/victims/add", async (req, res) => {
   const {
     victimName,
     familyMember,
+    damages,
     contact,
     address,
     union,
@@ -21,6 +22,7 @@ router.post("/victims/add", async (req, res) => {
     const newVictim = new Victims({
       victimName,
       familyMember,
+      damages,
       contact,
       address,
       union,
