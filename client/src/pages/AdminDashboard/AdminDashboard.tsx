@@ -13,6 +13,18 @@ import {
     TableHeader,
     TableRow,
   } from "@/components/ui/table";
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
+  } from "@/components/ui/alert-dialog"
+  
 import { useToast } from "@/components/ui/use-toast";
 import { Services } from "@/types/types";
 import axios from "axios";
@@ -30,7 +42,6 @@ const AdminDashboard = () => {
     const [services, setServices] = useState<Services[]>([]);
     const [newServices, setNewServices] = useState<Services[]>([]);
     const [listName, setListName] = useState<string>("");
-    const [clickedUpdate, setClickedUpdate] = useState("");
     const [formData, setFormData] = useState<formData>({
         teamName: "",
         workingArea: "",
@@ -76,7 +87,6 @@ const AdminDashboard = () => {
     }
 
     const handleClickUpdate = (id: string) => {
-        setClickedUpdate(id);
         const singleService = newServices.find(service => service._id === id);
         setFormData({
             teamName: singleService?.teamName,
@@ -85,10 +95,6 @@ const AdminDashboard = () => {
             providedService: singleService?.providedService,
             status: singleService?.status
         })
-    }
-
-    const handleCancelClickUpdate = () => {
-        setClickedUpdate("");
     }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -122,10 +128,6 @@ const AdminDashboard = () => {
             }
         })
         .catch(error => console.log(error));
-        setClickedUpdate('')
-
-        
-     
 };
 
   return (
@@ -163,59 +165,84 @@ const AdminDashboard = () => {
               {newServices.map((service) => (
                 <TableRow key={service._id}>
                   <TableCell className="text-Blue-200">
-                    { clickedUpdate === service._id?  (
-                        <input value={formData.teamName} 
-                                className="w-[100px] bg-Blue-100/20 rounded-md pl-1"
-                                name="teamName"
-                                onChange={handleChange}/>
-                    ): `${service.teamName}`}
+                    {service.teamName}
                   </TableCell>
                   <TableCell className="text-Blue-200">
-                  { clickedUpdate === service._id?  (
-                        <input value={formData.status} 
-                                className="w-[100px] bg-Blue-100/20 rounded-md pl-1"
-                                name="status"
-                                onChange={handleChange}/>
-                    ): `${service.status}`}
+                  {service.status}
                   </TableCell>
                   <TableCell className="text-Blue-200">
-                  { clickedUpdate === service._id?  (
-                        <input value={formData.workingArea}
-                               className="w-[100px] bg-Blue-100/20 rounded-md pl-1"
-                               name="workingArea"
-                               onChange={handleChange}/>
-                    ): `${service.workingArea}`}
+                  {service.workingArea}
                   </TableCell>
                   <TableCell className="text-Blue-200">
-                  { clickedUpdate === service._id?  (
-                        <input value={formData.providedService} 
-                               className="w-[100px] bg-Blue-100/20 rounded-md pl-1"
-                               name="providedService"
-                               onChange={handleChange}/>
-                    ): `${service.providedService}`}
+                  {service.providedService}
                   </TableCell>
                   <TableCell className="text-Blue-200">
-                  { clickedUpdate === service._id?  (
-                        <input value={formData.contact} 
-                               className="w-[100px] bg-Blue-100/20 rounded-md pl-1"
-                               name="contact"
-                               onChange={handleChange}/>
-                    ): `${service.contact}`}
+                  {service.contact}
                   </TableCell>
                   <TableCell className="text-Blue-200">
                     {convertDate(service.date)}
                   </TableCell>
-                {clickedUpdate === service._id? (
-                    <TableCell className="text-Blue-200 flex gap-1">
-                    <button onClick={() => handleVerify(service._id)} className="px-2 py-1 bg-Green-100 rounded-md text-white">Verify</button>
-                    <button onClick={handleCancelClickUpdate} className="px-2 py-1 bg-red-700 rounded-md text-white">Cancel</button>
-                  </TableCell>
-                  ): (
-                    <TableCell className="text-Blue-200 flex gap-1">
-                  <button onClick={() => handleClickUpdate(service._id)} className="px-2 py-1 bg-Green-100 rounded-md text-white">Verify</button>
+                  <TableCell className="text-Blue-200 flex gap-1">
+                  <AlertDialog>
+                    <AlertDialogTrigger>
+                    <button onClick={() => handleClickUpdate(service._id)} className="px-2 py-1 bg-Green-100 rounded-md text-white">Verify</button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>Verify Information</AlertDialogTitle>
+                        <AlertDialogDescription className="flex flex-col gap-3">
+                        <div className="flex flex-col gap-1">
+                          <label>টিমের নাম</label>
+                          <input value={formData.teamName} 
+                                  className="w-full h-8 bg-Blue-100/20 rounded-md pl-1"
+                                  name="teamName"
+                                  onChange={handleChange}
+                          />
+                        </div>
+                        <div className="flex flex-col gap-1">
+                          <label>স্ট্যাটাস</label>
+                          <input value={formData.status} 
+                                className="w-full h-8 bg-Blue-100/20 rounded-md pl-1"
+                                name="status"
+                                onChange={handleChange}
+                          />
+                        </div>
+                        <div className="flex flex-col gap-1">
+                          <label>কার্যক্রম এলাকা</label>
+                          <input value={formData.workingArea}
+                               className="w-full h-8 bg-Blue-100/20 rounded-md pl-1"
+                               name="workingArea"
+                               onChange={handleChange}
+                          />
+                        </div>
+                        <div className="flex flex-col gap-1">
+                          <label>সহায়তাসমূহ</label>
+                          <input value={formData.providedService} 
+                               className="w-full h-8 bg-Blue-100/20 rounded-md pl-1"
+                               name="providedService"
+                               onChange={handleChange}
+                          />
+                        </div>
+                        <div className="flex flex-col gap-1">
+                          <label>যোগাযোগ</label>
+                          <input value={formData.contact} 
+                               className="w-full h-8 bg-Blue-100/20 rounded-md pl-1"
+                               name="contact"
+                               onChange={handleChange}
+                          />
+                        </div>
+                        </AlertDialogDescription>
+                      </AlertDialogHeader>
+                      <AlertDialogFooter>
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogAction onClick={() => handleVerify(service._id)}>Verify</AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
+
                   <button className="px-2 py-1 bg-red-700 rounded-md text-white">Delete</button>
-                </TableCell>
-                  )}
+                  </TableCell>
+                 
                 </TableRow>
               ))}
             </TableBody>
