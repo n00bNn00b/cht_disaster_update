@@ -22,24 +22,45 @@ import { useEffect, useState } from "react";
 const Home = () => {
   const [services, setServices] = useState<Services[]>([]);
   const url = import.meta.env.VITE_API_URL;
+  const [currentPage, setCurrentPage] = useState(1); // State to track current page
+  const [totalPages, setTotalPages] = useState(1); // State to track total pages
+
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const response = await axios.get<Services[]>(`${url}/services`);
-        setServices(response.data);
+        const pageSize = 20; // Number of records per page (same as backend)
+        const response = await axios.get(
+          `${url}/services?page=${currentPage}&limit=${pageSize}` // Add pagination parameters
+        );
+        console.log(response.data)
+        setServices(response.data.data);
+        setTotalPages(Math.ceil(response.data.totalRecords / pageSize)); // Calculate total pages from response
       } catch (error) {
         console.log(error);
       }
     };
 
     fetchServices();
-  }, [url]);
+  }, [url, currentPage]); // Update on URL change or page change
 
   const convertDate = (isoDateString: string) => {
     const date = new Date(isoDateString);
     const formattedDate = date.toLocaleString();
     return formattedDate;
 }
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
   return (
     <>
       <Card className="bg-white/80">
@@ -56,7 +77,7 @@ const Home = () => {
           <Modal />
         </AlertDialog>
         <CardContent>
-          <Table>
+        <Table>
             <TableHeader>
               <TableRow>
                 <TableHead className="text-Green-200">টিমের নাম</TableHead>
@@ -104,6 +125,19 @@ const Home = () => {
               ))}
             </TableBody>
           </Table>
+          {/* Add pagination controls */}
+          <div className="flex justify-between mt-4">
+            {currentPage > 1 && (
+              <button onClick={handlePreviousPage} className="px-10 py-2 rounded-md bg-Green-200 text-white">
+                Previous Page
+              </button>
+            )}
+            {currentPage < totalPages && (
+              <button onClick={handleNextPage} className="px-10 py-2 rounded-md bg-Green-200 text-white">
+                Next Page
+              </button>
+            )}
+          </div>
         </CardContent>
       </Card>
     </>
