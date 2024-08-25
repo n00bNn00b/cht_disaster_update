@@ -19,10 +19,14 @@ export interface Areas {
 
 export interface Victim {
     _id: string;
-    victimName: string;
-    familyMember: number;
-    contact: string;
-    address: string;
+    victimName?: string;
+    familyMember?: number;
+    contact?: string;
+    address?: string;
+    union?: string;
+    subDistrict?: string;
+    district?: string;
+    status?: string;
     date: string;
     __v: number
 }
