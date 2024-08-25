@@ -95,7 +95,7 @@ router.put("/services/:id", async (req, res) => {
     }); // Update and return updated data
     if (!service) {
       return res.status(404).json({
-        error: "Service not found",
+        error: "Service not found!",
       });
     } else {
       res
@@ -106,7 +106,25 @@ router.put("/services/:id", async (req, res) => {
     // Include updated data in response
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ error: "Internal Server Error!" });
+  }
+});
+
+//delete
+router.delete("/services/:id", async (req, res) => {
+  try {
+    const serviceId = req.params.id;
+    const query = { _id: new mongoose.Types.ObjectId(serviceId) };
+
+    const deletedService = await Services.findByIdAndDelete(query);
+
+    if (!deletedService) {
+      return res.status(404).json({ error: "Service not found!" });
+    }
+
+    res.status(200).json({ message: "Service deleted successfully!" });
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error!" });
   }
 });
 

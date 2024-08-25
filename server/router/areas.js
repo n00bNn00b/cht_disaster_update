@@ -31,7 +31,7 @@ router.post("/areas/add", async (req, res) => {
 
     res.status(201).json({ message: "New Area added Successfully!" });
   } catch (err) {
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ error: "Internal Server Error!" });
   }
 });
 
@@ -88,7 +88,7 @@ router.put("/areas/:id", async (req, res) => {
     const area = await Areas.findOne(query);
     if (!area) {
       return res.status(404).json({
-        error: "Area not found",
+        error: "Area not found!",
       });
     } else {
       area.areaName = areaName;
@@ -104,6 +104,23 @@ router.put("/areas/:id", async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+router.delete("/areas/:id", async (req, res) => {
+  try {
+    const areaId = req.params.id;
+    const query = { _id: new mongoose.Types.ObjectId(areaId) };
+
+    const deletedArea = await Areas.findByIdAndDelete(query);
+
+    if (!deletedArea) {
+      return res.status(404).json({ error: "Area not found!" });
+    }
+
+    res.status(200).json({ message: "Area deleted successfully!" });
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error!" });
   }
 });
 

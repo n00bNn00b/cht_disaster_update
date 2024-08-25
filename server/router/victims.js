@@ -67,4 +67,49 @@ router.get("/victims", async (req, res) => {
   }
 });
 
+//update victim
+router.put("/victims/:id", async (req, res) => {
+  const id = req.params.id;
+  const query = { _id: new mongoose.Types.ObjectId(id) }; // Use the correct parameter name
+  const updateData = req.body; // Capture all update data in one object
+
+  try {
+    const victim = await Victims.findOneAndUpdate(query, updateData, {
+      new: true,
+    }); // Update and return updated data
+    if (!victim) {
+      return res.status(404).json({
+        error: "Victim not found!",
+      });
+    } else {
+      res
+        .status(200)
+        .json({ message: "Victim updated successfully!", data: service });
+    }
+
+    // Include updated data in response
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+//delete victim
+router.delete("/victims/:id", async (req, res) => {
+  try {
+    const victimId = req.params.id;
+    const query = { _id: new mongoose.Types.ObjectId(victimId) };
+
+    const deletedVictim = await Victims.findByIdAndDelete(query);
+
+    if (!deletedVictim) {
+      return res.status(404).json({ error: "Victim not found!" });
+    }
+
+    res.status(200).json({ message: "Victim deleted successfully!" });
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error!" });
+  }
+});
+
 module.exports = router;
