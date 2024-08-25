@@ -61,6 +61,7 @@ const TeamProgress = () => {
     } catch (error) {
       console.error("Error:", error);
     }
+    form.reset()
   };
   return (
     <>
