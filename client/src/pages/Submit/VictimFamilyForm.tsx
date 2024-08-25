@@ -23,6 +23,7 @@ const formSchema = z.object({
   address: z.string().min(3, {
     message: "address must be at least 3 characters.",
   }),
+  damages: z.string(),
   union: z.string(),
   subDistrict: z.string(),
   district: z.string(),
@@ -39,6 +40,7 @@ const VictimFamilyForm = () => {
     defaultValues: {
       victimName: "",
       contact: "",
+      damages: "",
       address: "",
       union: "",
       subDistrict: "",
@@ -93,7 +95,7 @@ const VictimFamilyForm = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-Green-100">
-                      পরিবারের সদস্য সংখ্যা
+                      পরিবারের সদস্য সংখ্যা(ইংরেজিতে)
                     </FormLabel>
                     <FormControl>
                       <Input
@@ -112,6 +114,24 @@ const VictimFamilyForm = () => {
                   <FormItem>
                     <FormLabel className="text-Green-100">
                       যোগাযোগের নম্বরঃ
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        className="bg-transparent border-black"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="damages"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-Green-100">
+                    ক্ষয়ক্ষতিসমূহ
                     </FormLabel>
                     <FormControl>
                       <Input
@@ -191,7 +211,7 @@ const VictimFamilyForm = () => {
                 className="bg-Green-100 w-full h-8 text-white rounded-md hover:bg-Green-100/80"
                 type="submit"
               >
-                Submit
+                যুক্ত করুন
               </button>
             </form>
           </Form>

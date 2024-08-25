@@ -18,19 +18,36 @@ import { useEffect, useState } from "react";
 
 const VictimFamilyList = () => {
     const [victimList, setVictimList] = useState<Victim[]>([]);
+    const [currentPage, setCurrentPage] = useState(1); // State to track current page
+    const [totalPages, setTotalPages] = useState(1); 
   const url = "https://cht-disaster-update.onrender.com";
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const response = await axios.get<Victim[]>(`${url}/victims`);
-        setVictimList(response.data);
+          const pageSize = 10;
+          const response = await axios.get(`${url}/victims?page=${currentPage}&limit=${pageSize}`);
+          setTotalPages(Math.ceil(response.data.totalRecords / pageSize));
+          setVictimList(response.data.data);
       } catch (error) {
         console.log(error);
       }
     };
 
     fetchServices();
-  }, [url]);
+  }, [url, currentPage]);
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
   const convertDate = (isoDateString: string) => {
     const date = new Date(isoDateString);
     const formattedDate = date.toLocaleString();
@@ -51,6 +68,7 @@ const VictimFamilyList = () => {
                 <TableHead className="text-Green-200 font-bold">নাম</TableHead>
                 <TableHead className="text-Green-200 font-bold">পরিবারের সদস্য সংখ্যা</TableHead>
                 <TableHead className="text-Green-200 font-bold">যোগাযোগের নম্বরঃ</TableHead>
+                <TableHead className="text-Green-200 font-bold">ক্ষয়ক্ষতিসমূহ</TableHead>
                 <TableHead className="text-Green-200 font-bold">গ্রামের নাম</TableHead>
                 <TableHead className="text-Green-200 font-bold">ইউনিয়ন</TableHead>
                 <TableHead className="text-Green-200 font-bold">উপজেলা</TableHead>
@@ -71,6 +89,9 @@ const VictimFamilyList = () => {
                     {victim.contact}
                   </TableCell>
                   <TableCell className="text-Blue-200">
+                    {victim.damages}
+                  </TableCell>
+                  <TableCell className="text-Blue-200">
                     {victim.address}
                   </TableCell>
                   <TableCell className="text-Blue-200">
@@ -89,6 +110,18 @@ const VictimFamilyList = () => {
               ))}
             </TableBody>
           </Table>
+          <div className="flex justify-between mt-4">
+            {currentPage > 1 && (
+              <button onClick={handlePreviousPage} className="px-10 py-2 rounded-md bg-Green-200 text-white">
+                Previous Page
+              </button>
+            )}
+            {currentPage < totalPages && (
+              <button onClick={handleNextPage} className="px-10 py-2 rounded-md bg-Green-200 text-white">
+                Next Page
+              </button>
+            )}
+          </div>
         </CardContent>
       </Card>
     </>

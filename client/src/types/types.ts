@@ -13,6 +13,11 @@ export interface Services {
 export interface Areas {
     _id: string;
     areaName: string;
+    families?: number;
+    union?: string;
+    subDistrict?: string;
+    district?: string;
+    representitive?: string;
     date: string;
     __v: number
 }
@@ -21,6 +26,7 @@ export interface Victim {
     _id: string;
     victimName?: string;
     familyMember?: number;
+    damages?: string;
     contact?: string;
     address?: string;
     union?: string;
