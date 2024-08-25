@@ -58,19 +58,17 @@ const AdminDashboard = () => {
     const fetchServices = async () => {
         try {
             const pageSize = 20; // Number of records per page (same as backend)
-        const response = await axios.get(
-          `${url}/services?page=${currentPage}&limit=${pageSize}` // Add pagination parameters
-        );
-        console.log(response.data)
-        setServices(response.data.data);
-        setNewServices(response.data.data);
-        setTotalPages(Math.ceil(response.data.totalRecords / pageSize)); 
-        } catch (error) {
-            console.log(error);
+            const response = await axios.get(
+              `${url}/services?page=${currentPage}&limit=${pageSize}` // Add pagination parameters
+            );
+            console.log(response.data)
+            setServices(response.data.data);
+            setNewServices(response.data.data);
+            setTotalPages(Math.ceil(response.data.totalRecords / pageSize)); 
+            } catch (error) {
+                console.log(error);
         }
         };
-    
-
     useEffect(() => {
         fetchServices();
     });
