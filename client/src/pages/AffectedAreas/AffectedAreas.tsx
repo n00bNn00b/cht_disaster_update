@@ -42,7 +42,7 @@ const AffectedAreasPage = () => {
       }
     };
   
-  const handlePreviousPage = () => {
+    const handlePreviousPage = () => {
       if (currentPage > 1) {
         setCurrentPage(currentPage - 1);
       }
@@ -57,11 +57,15 @@ const AffectedAreasPage = () => {
             </CardTitle>
           </CardHeader>
          <CardContent>
-            <Table>
+            <Table> 
               <TableHeader>
                 <TableRow>
-                  <TableHead className="text-Green-200">দুর্গত এলাকাসমূহ</TableHead>
-                  
+                  <TableHead className="text-Green-200 font-bold">এলাকার নাম</TableHead>
+                  <TableHead className="text-Green-200 font-bold">পরিবার সংখ্যা</TableHead>
+                  <TableHead className="text-Green-200 font-bold">ইউনিয়ন</TableHead>
+                  <TableHead className="text-Green-200 font-bold">উপজেলা</TableHead>
+                  <TableHead className="text-Green-200 font-bold">জেলা</TableHead>
+                  <TableHead className="text-Green-200 font-bold">যোগাযোগের প্রতিনিধি</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -69,6 +73,21 @@ const AffectedAreasPage = () => {
                   <TableRow key={area._id}>
                     <TableCell className="text-Blue-200">
                       {area.areaName}
+                    </TableCell>
+                    <TableCell className="text-Blue-200">
+                      {area.families}
+                    </TableCell>
+                    <TableCell className="text-Blue-200">
+                      {area.union}
+                    </TableCell>
+                    <TableCell className="text-Blue-200">
+                      {area.subDistrict}
+                    </TableCell>
+                    <TableCell className="text-Blue-200">
+                      {area.district}
+                    </TableCell>
+                    <TableCell className="text-Blue-200">
+                      {area.representitive}
                     </TableCell>
                   </TableRow>
                 ))}

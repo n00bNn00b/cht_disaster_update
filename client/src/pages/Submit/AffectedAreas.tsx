@@ -19,6 +19,11 @@ const formSchema = z.object({
   areaName: z.string().min(3, {
     message: "areaName must be at least 3 characters.",
   }),
+  families: z.coerce.number().int().gte(0).positive(),
+  union: z.string(),
+  subDistrict: z.string(),
+  district: z.string(),
+  representitive: z.string(),
   date: z.date(),
 });
 
@@ -31,6 +36,10 @@ const AffectedAreas = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       areaName: "",
+      union: "",
+      subDistrict: "",
+      district: "",
+      representitive: "",
       date: date,
     },
   });
@@ -65,7 +74,7 @@ const AffectedAreas = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-Green-100">
-                      দুর্গত এলাকার নাম(উদাহরণঃ লতিবান, পানছড়ি)
+                      এলাকার নাম
                     </FormLabel>
                     <FormControl>
                       <Input
@@ -77,6 +86,97 @@ const AffectedAreas = () => {
                   </FormItem>
                 )}
               />
+              <FormField
+                control={form.control}
+                name="families"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-Green-100">
+                    পরিবার সংখ্যা(ইংরেজিতে)
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        className="bg-transparent border-black"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="union"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-Green-100">
+                    ইউনিয়ন
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        className="bg-transparent border-black"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="subDistrict"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-Green-100">
+                    উপজেলা
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        className="bg-transparent border-black"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="district"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-Green-100">
+                    জেলা
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        className="bg-transparent border-black"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="representitive"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-Green-100">
+                      যোগাযোগের জন্য প্রতিনিধির নম্বর(যদি থাকে)
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        className="bg-transparent border-black"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              
               <button
                 className="bg-Green-100 w-full h-8 text-white rounded-md hover:bg-Green-100/80"
                 type="submit"
