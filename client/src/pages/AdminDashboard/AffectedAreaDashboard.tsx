@@ -54,7 +54,8 @@ const AffectedAreaDashboard = () => {
     const url = "https://cht-disaster-update.onrender.com";
     const date = new Date();
 
-    const fetchAreas = async () => {
+    useEffect(() => {
+      const fetchAreas = async () => {
         try {
             const pageSize = 20; // Number of records per page (same as backend)
             const response = await axios.get(
@@ -67,7 +68,6 @@ const AffectedAreaDashboard = () => {
                 console.log(error);
         }
         };
-    useEffect(() => {
         fetchAreas();
      });
 
@@ -111,7 +111,6 @@ const AffectedAreaDashboard = () => {
         }
         await axios.put(`${url}/areas/${id}`, data)
         .then(res => {
-            fetchAreas();
             console.log(res)
             if(res.status === 200) {
                 toast({
@@ -120,7 +119,6 @@ const AffectedAreaDashboard = () => {
             }
         })
         .catch(error => console.log(error));
-        fetchAreas();
 };
 
 const handleNextPage = () => {
@@ -134,6 +132,8 @@ const handlePreviousPage = () => {
       setCurrentPage(currentPage - 1);
     }
   };
+
+
 
   return (
     <>
@@ -247,9 +247,21 @@ const handlePreviousPage = () => {
                     </AlertDialogContent>
                   </AlertDialog>
 
-                  <button className="px-2 py-1 bg-red-700 rounded-md text-white">Delete</button>
-                  </TableCell>
-                 
+                  <AlertDialog>
+                    <AlertDialogTrigger>
+                      <button className="px-2 py-1 bg-red-700 rounded-md text-white">Delete</button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                      </AlertDialogHeader>
+                      <AlertDialogFooter>
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogAction className="bg-red-700">Delete</AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
+                 </TableCell>
                 </TableRow>
               ))}
             </TableBody>
