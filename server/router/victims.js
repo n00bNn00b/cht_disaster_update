@@ -5,7 +5,17 @@ require("../db/connection");
 const Victims = require("../model/victimSchema");
 
 router.post("/victims/add", async (req, res) => {
-  const { victimName, familyMember, contact, address, status, date } = req.body;
+  const {
+    victimName,
+    familyMember,
+    contact,
+    address,
+    union,
+    subDistrict,
+    district,
+    status,
+    date,
+  } = req.body;
 
   try {
     const newVictim = new Victims({
@@ -13,6 +23,9 @@ router.post("/victims/add", async (req, res) => {
       familyMember,
       contact,
       address,
+      union,
+      subDistrict,
+      district,
       status,
       date,
     });
