@@ -5,6 +5,21 @@ const areaSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  families: {
+    type: Number,
+  },
+  union: {
+    type: String,
+  },
+  subDistrict: {
+    type: String,
+  },
+  district: {
+    type: String,
+  },
+  representitive: {
+    type: String,
+  },
 
   date: {
     type: Date,

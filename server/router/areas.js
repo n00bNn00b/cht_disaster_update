@@ -5,11 +5,24 @@ require("../db/connection");
 const Areas = require("../model/areaSchema");
 
 router.post("/areas/add", async (req, res) => {
-  const { areaName, date } = req.body;
+  const {
+    areaName,
+    families,
+    union,
+    subDistrict,
+    district,
+    representitive,
+    date,
+  } = req.body;
 
   try {
     const newArea = new Areas({
       areaName,
+      families,
+      union,
+      subDistrict,
+      district,
+      representitive,
       date,
     });
 
