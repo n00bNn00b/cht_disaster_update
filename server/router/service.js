@@ -35,10 +35,32 @@ router.post("/services/add", async (req, res) => {
   }
 });
 
+// router.get("/services", async (req, res) => {
+//   try {
+//     const services = await Services.find();
+//     res.status(200).json(services);
+//   } catch (error) {
+//     res.status(500).json({ error: "Internal Server Error!" });
+//   }
+// });
 router.get("/services", async (req, res) => {
   try {
-    const services = await Services.find();
-    res.status(200).json(services);
+    const page = parseInt(req.query.page) || 1; // Get the page number from the query parameter
+    const limit = 20; // Set the number of records per page
+
+    const services = await Services.find()
+      .skip((page - 1) * limit) // Skip records based on the page number
+      .limit(limit); // Limit the number of records
+
+    const totalRecords = await Services.countDocuments(); // Get the total number of records
+    const totalPages = Math.ceil(totalRecords / limit); // Calculate the total number of pages
+
+    res.status(200).json({
+      data: services,
+      currentPage: page,
+      totalPages,
+      totalRecords,
+    });
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error!" });
   }
