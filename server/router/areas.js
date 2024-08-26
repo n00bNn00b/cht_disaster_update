@@ -51,9 +51,6 @@ router.get("/areas", async (req, res) => {
     const limit = 10; // Adjust the limit as needed
 
     const areas = await Areas.find()
-      .sort({
-        date: -1,
-      })
       .skip((page - 1) * limit)
       .limit(limit);
 
