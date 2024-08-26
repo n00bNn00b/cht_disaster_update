@@ -29,6 +29,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { Services } from "@/types/types";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface formData {
   teamName?: string;
@@ -300,15 +301,15 @@ const handleDelete = async (id:string) => {
               ))}
             </TableBody>
           </Table>
-          <div className="flex justify-between mt-4">
+          <div className="flex justify-center gap-4 mt-4">
             {currentPage > 1 && (
-              <button onClick={handlePreviousPage} className="px-10 py-2 rounded-md bg-Green-200 text-white">
-                Previous Page
+              <button onClick={handlePreviousPage} className="px-2 py-2 rounded-xl bg-Green-200 text-white hover:bg-Green-200/90">
+                <ChevronLeft/>
               </button>
             )}
             {currentPage < totalPages && (
-              <button onClick={handleNextPage} className="px-10 py-2 rounded-md bg-Green-200 text-white">
-                Next Page
+              <button onClick={handleNextPage} className="px-2 py-2 rounded-xl bg-Green-200 text-white hover:bg-Green-200/90">
+                <ChevronRight/>
               </button>
             )}
           </div>
