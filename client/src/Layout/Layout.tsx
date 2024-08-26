@@ -14,11 +14,11 @@ const Layout = () => {
           }}
           className="min-h-[100vh] pb-6 pt-20 bg-cover bg-center"
         >
-          <div className="w-[90%] mx-auto">
-            <Outlet />
+          <div className="w-[96%] mx-auto">
+            <Outlet/>
           </div>
         </div>
-        <Toaster />
+        <Toaster/>
       </div>
     </>
   );
