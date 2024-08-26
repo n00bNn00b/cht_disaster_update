@@ -76,13 +76,13 @@ const VictimFamilyForm = () => {
                 name="victimName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-Green-100">
+                    <FormLabel className="text-Green-100 font-semibold font-special">
                       ভিক্টিমের নাম
                     </FormLabel>
                     <FormControl>
                       <Input
                         {...field}
-                        className="bg-transparent border-black"
+                        className="bg-transparent border-Blue-200/20"
                       />
                     </FormControl>
                     <FormMessage />
@@ -94,13 +94,13 @@ const VictimFamilyForm = () => {
                 name="familyMember"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-Green-100">
+                    <FormLabel className="text-Green-100 font-semibold font-special">
                       পরিবারের সদস্য সংখ্যা(ইংরেজিতে)
                     </FormLabel>
                     <FormControl>
                       <Input
                         {...field}
-                        className="bg-transparent border-black"
+                        className="bg-transparent border-Blue-200/20"
                       />
                     </FormControl>
                     <FormMessage />
@@ -112,13 +112,13 @@ const VictimFamilyForm = () => {
                 name="contact"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-Green-100">
+                    <FormLabel className="text-Green-100 font-semibold font-special">
                       যোগাযোগের নম্বরঃ
                     </FormLabel>
                     <FormControl>
                       <Input
                         {...field}
-                        className="bg-transparent border-black"
+                        className="bg-transparent border-Blue-200/20"
                       />
                     </FormControl>
                     <FormMessage />
@@ -130,13 +130,13 @@ const VictimFamilyForm = () => {
                 name="damages"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-Green-100">
+                    <FormLabel className="text-Green-100 font-semibold font-special">
                     ক্ষয়ক্ষতিসমূহ
                     </FormLabel>
                     <FormControl>
                       <Input
                         {...field}
-                        className="bg-transparent border-black"
+                        className="bg-transparent border-Blue-200/20"
                       />
                     </FormControl>
                     <FormMessage />
@@ -148,11 +148,11 @@ const VictimFamilyForm = () => {
                 name="address"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-Green-100">গ্রামের নাম</FormLabel>
+                    <FormLabel className="text-Green-100 font-semibold font-special">গ্রামের নাম</FormLabel>
                     <FormControl>
                       <Input
                         {...field}
-                        className="bg-transparent border-black"
+                        className="bg-transparent border-Blue-200/20"
                       />
                     </FormControl>
                     <FormMessage />
@@ -164,11 +164,11 @@ const VictimFamilyForm = () => {
                 name="union"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-Green-100">ইউনিয়ন</FormLabel>
+                    <FormLabel className="text-Green-100 font-semibold font-special">ইউনিয়ন</FormLabel>
                     <FormControl>
                       <Input
                         {...field}
-                        className="bg-transparent border-black"
+                        className="bg-transparent border-Blue-200/20"
                       />
                     </FormControl>
                     <FormMessage />
@@ -180,11 +180,11 @@ const VictimFamilyForm = () => {
                 name="subDistrict"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-Green-100">উপজেলা</FormLabel>
+                    <FormLabel className="text-Green-100 font-semibold font-special">উপজেলা</FormLabel>
                     <FormControl>
                       <Input
                         {...field}
-                        className="bg-transparent border-black"
+                        className="bg-transparent border-Blue-200/20"
                       />
                     </FormControl>
                     <FormMessage />
@@ -196,11 +196,11 @@ const VictimFamilyForm = () => {
                 name="district"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-Green-100">জেলা</FormLabel>
+                    <FormLabel className="text-Green-100 font-semibold font-special">জেলা</FormLabel>
                     <FormControl>
                       <Input
                         {...field}
-                        className="bg-transparent border-black"
+                        className="bg-transparent border-Blue-200/20"
                       />
                     </FormControl>
                     <FormMessage />

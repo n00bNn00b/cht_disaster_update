@@ -28,7 +28,6 @@ import { useToast } from "@/components/ui/use-toast";
 import { Areas } from "@/types/types";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import AdmitCard from "./AdmitCard";
 
 interface formData {
   areaName?: string;
@@ -161,7 +160,6 @@ const handleDelete = async (id:string) => {
 
   return (
     <>
-      <AdmitCard/>
       <Card className="bg-white/80 mt-6">
         <CardHeader>
           <CardTitle className="text-xl font-bold font-special text-Green-100">
@@ -213,52 +211,52 @@ const handleDelete = async (id:string) => {
                     </AlertDialogTrigger>
                     <AlertDialogContent>
                       <AlertDialogHeader>
-                        <AlertDialogTitle>Verify Information</AlertDialogTitle>
+                        <AlertDialogTitle className="text-Green-200 font-special font-bold">Verify Information</AlertDialogTitle>
                         <AlertDialogDescription className="flex flex-col gap-3">
                         <div className="flex flex-col gap-1">
-                          <label>এলাকার নাম</label>
+                          <label className="text-Green-200 font-semibold">এলাকার নাম</label>
                           <input value={formData.areaName} 
-                                  className="w-full h-8 bg-Blue-100/20 rounded-md pl-1"
+                                  className="w-full h-8 border rounded-md pl-2"
                                   name="areaName"
                                   onChange={handleChange}
                           />
                         </div>
                         <div className="flex flex-col gap-1">
-                          <label>পরিবার সংখ্যা</label>
+                          <label className="text-Green-200 font-semibold">পরিবার সংখ্যা</label>
                           <input value={formData.families} 
-                                className="w-full h-8 bg-Blue-100/20 rounded-md pl-1"
+                                className="w-full h-8 border rounded-md pl-2"
                                 name="families"
                                 onChange={handleChange}
                           />
                         </div>
                         <div className="flex flex-col gap-1">
-                          <label>ইউনিয়ন</label>
+                          <label className="text-Green-200 font-semibold">ইউনিয়ন</label>
                           <input value={formData.union}
-                               className="w-full h-8 bg-Blue-100/20 rounded-md pl-1"
+                               className="w-full h-8 border rounded-md pl-2"
                                name="union"
                                onChange={handleChange}
                           />
                         </div>
                         <div className="flex flex-col gap-1">
-                          <label>উপজেলা</label>
+                          <label className="text-Green-200 font-semibold">উপজেলা</label>
                           <input value={formData.subDistrict} 
-                               className="w-full h-8 bg-Blue-100/20 rounded-md pl-1"
+                               className="w-full h-8 border rounded-md pl-2"
                                name="subDistrict"
                                onChange={handleChange}
                           />
                         </div>
                         <div className="flex flex-col gap-1">
-                          <label>জেলা</label>
+                          <label className="text-Green-200 font-semibold">জেলা</label>
                           <input value={formData.district} 
-                               className="w-full h-8 bg-Blue-100/20 rounded-md pl-1"
+                               className="w-full h-8 border rounded-md pl-2"
                                name="district"
                                onChange={handleChange}
                           />
                         </div>
                         <div className="flex flex-col gap-1">
-                          <label>যোগাযোগ</label>
+                          <label className="text-Green-200 font-semibold">যোগাযোগ</label>
                           <input value={formData.representitive} 
-                               className="w-full h-8 bg-Blue-100/20 rounded-md pl-1"
+                               className="w-full h-8 border rounded-md pl-2"
                                name="representitive"
                                onChange={handleChange}
                           />
@@ -267,7 +265,7 @@ const handleDelete = async (id:string) => {
                       </AlertDialogHeader>
                       <AlertDialogFooter>
                         <AlertDialogCancel>Cancel</AlertDialogCancel>
-                        <AlertDialogAction onClick={() => handleVerify(area._id)}>Update</AlertDialogAction>
+                        <AlertDialogAction className="bg-Green-200" onClick={() => handleVerify(area._id)}>Update</AlertDialogAction>
                       </AlertDialogFooter>
                     </AlertDialogContent>
                   </AlertDialog>

@@ -67,19 +67,19 @@ const AffectedAreas = () => {
         </CardHeader>
         <CardContent>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               <FormField
                 control={form.control}
                 name="areaName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-Green-100">
+                    <FormLabel className="text-Green-100 font-special font-semibold">
                       এলাকার নাম
                     </FormLabel>
                     <FormControl>
                       <Input
                         {...field}
-                        className="bg-transparent border-black"
+                        className="bg-transparent border-Blue-200/20"
                       />
                     </FormControl>
                     <FormMessage />
@@ -91,13 +91,13 @@ const AffectedAreas = () => {
                 name="families"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-Green-100">
+                    <FormLabel className="text-Green-100 font-special font-semibold">
                     পরিবার সংখ্যা(ইংরেজিতে)
                     </FormLabel>
                     <FormControl>
                       <Input
                         {...field}
-                        className="bg-transparent border-black"
+                        className="bg-transparent border-Blue-200/20"
                       />
                     </FormControl>
                     <FormMessage />
@@ -109,13 +109,13 @@ const AffectedAreas = () => {
                 name="union"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-Green-100">
+                    <FormLabel className="text-Green-100 font-special font-semibold">
                     ইউনিয়ন
                     </FormLabel>
                     <FormControl>
                       <Input
                         {...field}
-                        className="bg-transparent border-black"
+                        className="bg-transparent border-Blue-200/20"
                       />
                     </FormControl>
                     <FormMessage />
@@ -127,13 +127,13 @@ const AffectedAreas = () => {
                 name="subDistrict"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-Green-100">
+                    <FormLabel className="text-Green-100 font-special font-semibold">
                     উপজেলা
                     </FormLabel>
                     <FormControl>
                       <Input
                         {...field}
-                        className="bg-transparent border-black"
+                        className="bg-transparent border-Blue-200/20"
                       />
                     </FormControl>
                     <FormMessage />
@@ -145,13 +145,13 @@ const AffectedAreas = () => {
                 name="district"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-Green-100">
+                    <FormLabel className="text-Green-100 font-special font-semibold">
                     জেলা
                     </FormLabel>
                     <FormControl>
                       <Input
                         {...field}
-                        className="bg-transparent border-black"
+                        className="bg-transparent border-Blue-200/20"
                       />
                     </FormControl>
                     <FormMessage />
@@ -163,13 +163,13 @@ const AffectedAreas = () => {
                 name="representitive"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-Green-100">
+                    <FormLabel className="text-Green-100 font-special font-semibold">
                       যোগাযোগের জন্য প্রতিনিধির নম্বর(যদি থাকে)
                     </FormLabel>
                     <FormControl>
                       <Input
                         {...field}
-                        className="bg-transparent border-black"
+                        className="bg-transparent border-Blue-200/20"
                       />
                     </FormControl>
                     <FormMessage />

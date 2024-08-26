@@ -12,7 +12,7 @@ const Submit = () => {
               : "text-white font-special font-bold hover:underline"
           }
         >
-          টিমের অগ্রগতি
+          টিমের অগ্রগতি হালনাগাদ
         </NavLink>
         <NavLink
           to={"/submit/affected-areas"}
