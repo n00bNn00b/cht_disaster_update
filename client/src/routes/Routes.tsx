@@ -2,6 +2,7 @@ import Layout from "@/Layout/Layout";
 import AdminDashboard from "@/pages/AdminDashboard/AdminDashboard";
 import AdmitCard from "@/pages/AdminDashboard/AdmitCard";
 import AffectedAreaDashboard from "@/pages/AdminDashboard/AffectedAreaDashboard";
+import VictimListDashboard from "@/pages/AdminDashboard/VictimLishDashboard";
 import AffectedAreasPage from "@/pages/AffectedAreas/AffectedAreas";
 import Home from "@/pages/Home/Home";
 import AffectedAreas from "@/pages/Submit/AffectedAreas";
@@ -32,7 +33,11 @@ const routes = createBrowserRouter([
                     {
                         path: "areas",
                         element: <AffectedAreaDashboard/>
-                    }
+                    },
+                    {
+                        path: "victim-list",
+                        element: <VictimListDashboard/>
+                    },
                 ]
             },
             {
