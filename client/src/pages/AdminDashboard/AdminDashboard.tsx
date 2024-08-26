@@ -29,8 +29,6 @@ import { useToast } from "@/components/ui/use-toast";
 import { Services } from "@/types/types";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import AdmitCard from "./AdmitCard";
-
 
 interface formData {
   teamName?: string;
@@ -177,7 +175,6 @@ const handleDelete = async (id:string) => {
 
   return (
     <>
-      <AdmitCard/>
       <Card className="bg-white/80 mt-6">
         <CardHeader>
           <CardTitle className="text-xl font-bold font-special text-Green-100">
@@ -233,44 +230,44 @@ const handleDelete = async (id:string) => {
                     </AlertDialogTrigger>
                     <AlertDialogContent>
                       <AlertDialogHeader>
-                        <AlertDialogTitle>Verify Information</AlertDialogTitle>
+                        <AlertDialogTitle className="text-Green-200 font-special font-semibold">Verify Information</AlertDialogTitle>
                         <AlertDialogDescription className="flex flex-col gap-3">
                         <div className="flex flex-col gap-1">
-                          <label>টিমের নাম</label>
+                          <label className="text-Green-200 font-semibold">টিমের নাম</label>
                           <input value={formData.teamName} 
-                                  className="w-full h-8 bg-Blue-100/20 rounded-md pl-1"
+                                  className="w-full h-8 border rounded-md pl-2"
                                   name="teamName"
                                   onChange={handleChange}
                           />
                         </div>
                         <div className="flex flex-col gap-1">
-                          <label>স্ট্যাটাস</label>
+                          <label className="text-Green-200 font-semibold">স্ট্যাটাস</label>
                           <input value={formData.status} 
-                                className="w-full h-8 bg-Blue-100/20 rounded-md pl-1"
+                                className="w-full h-8 border rounded-md pl-2"
                                 name="status"
                                 onChange={handleChange}
                           />
                         </div>
                         <div className="flex flex-col gap-1">
-                          <label>কার্যক্রম এলাকা</label>
+                          <label className="text-Green-200 font-semibold">কার্যক্রম এলাকা</label>
                           <input value={formData.workingArea}
-                               className="w-full h-8 bg-Blue-100/20 rounded-md pl-1"
+                               className="w-full h-8 border rounded-md pl-2"
                                name="workingArea"
                                onChange={handleChange}
                           />
                         </div>
                         <div className="flex flex-col gap-1">
-                          <label>সহায়তাসমূহ</label>
+                          <label className="text-Green-200 font-semibold">সহায়তাসমূহ</label>
                           <input value={formData.providedService} 
-                               className="w-full h-8 bg-Blue-100/20 rounded-md pl-1"
+                               className="w-full h-8 border rounded-md pl-2"
                                name="providedService"
                                onChange={handleChange}
                           />
                         </div>
                         <div className="flex flex-col gap-1">
-                          <label>যোগাযোগ</label>
+                          <label className="text-Green-200 font-semibold">যোগাযোগ</label>
                           <input value={formData.contact} 
-                               className="w-full h-8 bg-Blue-100/20 rounded-md pl-1"
+                               className="w-full h-8 border rounded-md pl-2"
                                name="contact"
                                onChange={handleChange}
                           />
@@ -279,7 +276,7 @@ const handleDelete = async (id:string) => {
                       </AlertDialogHeader>
                       <AlertDialogFooter>
                         <AlertDialogCancel>Cancel</AlertDialogCancel>
-                        <AlertDialogAction onClick={() => handleVerify(service._id)}>Verify</AlertDialogAction>
+                        <AlertDialogAction className="bg-Green-200" onClick={() => handleVerify(service._id)}>Verify</AlertDialogAction>
                       </AlertDialogFooter>
                     </AlertDialogContent>
                   </AlertDialog>

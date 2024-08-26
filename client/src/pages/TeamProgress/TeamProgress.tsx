@@ -68,7 +68,7 @@ const TeamProgress = () => {
       <Card className="bg-white/80">
         <CardHeader>
           <CardTitle className="text-xl font-bold font-special text-Green-100">
-            টিমের অগ্রগতি
+            টিমের অগ্রগতি হালনাগাদ
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -79,13 +79,13 @@ const TeamProgress = () => {
                 name="teamName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-Green-100">
+                    <FormLabel className="text-Green-100 font-semibold">
                       টিমের নাম(উদাহরণঃ উন্মেষ/বিএমএসসি/টিএসএফ)
                     </FormLabel>
                     <FormControl>
                       <Input
                         {...field}
-                        className="bg-transparent border-black"
+                        className="bg-transparent border-Blue-200/20"
                       />
                     </FormControl>
                     <FormMessage />
@@ -97,13 +97,13 @@ const TeamProgress = () => {
                 name="status"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-Green-100">
+                    <FormLabel className="text-Green-100 font-semibold">
                       টিম কার্যক্রম স্ট্যাটাস(চলমান/সম্পন্ন হয়েছে)
                     </FormLabel>
                     <FormControl>
                       <Input
                         {...field}
-                        className="bg-transparent border-black"
+                        className="bg-transparent border-Blue-200/20"
                       />
                     </FormControl>
                     <FormMessage />
@@ -115,13 +115,13 @@ const TeamProgress = () => {
                 name="workingArea"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-Green-100">
+                    <FormLabel className="text-Green-100 font-semibold">
                       কার্যক্রম এলাকা(উদাহরণঃ লতিবান/পূর্ব মানিকছড়ি/মাইসছড়ি)
                     </FormLabel>
                     <FormControl>
                       <Input
                         {...field}
-                        className="bg-transparent border-black"
+                        className="bg-transparent border-Blue-200/20"
                       />
                     </FormControl>
                     <FormMessage />
@@ -133,13 +133,13 @@ const TeamProgress = () => {
                 name="providedService"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-Green-100">
+                    <FormLabel className="text-Green-100 font-semibold">
                       সহায়তাসমূহ(উদাহরণঃ আর্থিক/ত্রাণ/উদ্ধার কার্যক্রম)
                     </FormLabel>
                     <FormControl>
                       <Input
                         {...field}
-                        className="bg-transparent border-black"
+                        className="bg-transparent border-Blue-200/20"
                       />
                     </FormControl>
                     <FormMessage />
@@ -151,13 +151,13 @@ const TeamProgress = () => {
                 name="contact"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-Green-100">
+                    <FormLabel className="text-Green-100 font-semibold">
                       যোগাযোগের নম্বর
                     </FormLabel>
                     <FormControl>
                       <Input
                         {...field}
-                        className="bg-transparent border-black"
+                        className="bg-transparent border-Blue-200/20"
                       />
                     </FormControl>
                     <FormMessage />

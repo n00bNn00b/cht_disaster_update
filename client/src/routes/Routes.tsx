@@ -1,5 +1,6 @@
 import Layout from "@/Layout/Layout";
 import AdminDashboard from "@/pages/AdminDashboard/AdminDashboard";
+import AdmitCard from "@/pages/AdminDashboard/AdmitCard";
 import AffectedAreaDashboard from "@/pages/AdminDashboard/AffectedAreaDashboard";
 import AffectedAreasPage from "@/pages/AffectedAreas/AffectedAreas";
 import Home from "@/pages/Home/Home";
@@ -22,11 +23,17 @@ const routes = createBrowserRouter([
             },
             {
                 path: "/admin/verify",
-                element: <AdminDashboard/>,
-            },
-            {
-                path: "admin/affected-area",
-                element: <AffectedAreaDashboard/>
+                element: <AdmitCard/>,
+                children: [
+                    {
+                        path: "home",
+                        element: <AdminDashboard/>
+                    },
+                    {
+                        path: "areas",
+                        element: <AffectedAreaDashboard/>
+                    }
+                ]
             },
             {
                 path: "/affected-areas",
