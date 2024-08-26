@@ -47,9 +47,6 @@ router.get("/victims", async (req, res) => {
     const limit = 10; // Adjust the limit as needed
 
     const victims = await Victims.find()
-      .sort({
-        date: -1,
-      })
       .skip((page - 1) * limit)
       .limit(limit);
 

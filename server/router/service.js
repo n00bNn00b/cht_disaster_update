@@ -49,7 +49,6 @@ router.get("/services", async (req, res) => {
     const limit = 20; // Set the number of records per page
 
     const services = await Services.find()
-      .sort({ date: -1 })
       .skip((page - 1) * limit) // Skip records based on the page number
       .limit(limit); // Limit the number of records
 
